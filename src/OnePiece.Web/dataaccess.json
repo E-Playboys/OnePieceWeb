@@ -1,0 +1,9 @@
+﻿{
+  "ConnectionString": {
+    "Host": ".",
+    "Port": "0",
+    "DbName": "OnePiece",
+    "User": "sa",
+    "Password": "Asdcxz1+"
+  }
+}
