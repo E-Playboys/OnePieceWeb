@@ -1,0 +1,136 @@
+<div class="container" data-ng-controller="leagueCtrl as leaguectrl">
+
+    <div class="block-header">
+        <h2>Leagues<small>List of Leagues</small></h2>
+    </div>
+
+    <!-- Add button -->
+    <button class="btn btn-float btn-danger m-btn" data-ng-click="leaguectrl.open()" data-ng-if="onepiecectrl.authentication.isAdmin"><i class="zmdi zmdi-plus"></i></button>
+
+    <script type="text/ng-template" id="addLeagueForm">
+        <div class="modal-header">
+            <h4 class="modal-title">Add League</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <p class="f-500 c-black m-b-20">Logo</p>
+
+                    <div class="fileinput fileinput-new p-r-0" data-provides="fileinput">
+                        <div class="fileinput-preview square thumbnail" data-trigger="fileinput">
+                            <span class="progress" data-ng-repeat="item in logoUploader.queue" ng-style="{ 'width': item.progress + '%' }">{{item.progress}} %</span>
+                            <img data-ng-src="{{newLeague.Logo}}" data-ng-if="newLeague.Logo" />
+                        </div>
+                        <input type="file" nv-file-select name="..." uploader="logoUploader" class="wall-uploader">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                  <div class="col-sm-12">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="zmdi zmdi-account-box"></i></span>
+                      <div class="fg-line">
+                        <input type="text" class="form-control" placeholder="Full Name" data-ng-model="newLeague.FullName">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
+                      <div class="fg-line">
+                        <input type="text" class="form-control" placeholder="Short Name" data-ng-model="newLeague.ShortName">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="zmdi zmdi-face"></i></span>
+                      <div class="fg-line">
+                        <input type="text" class="form-control" placeholder="Nick Name" data-ng-model="newLeague.NickName">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary btn-icon-text waves-effect" data-ng-click="save()"><i class="zmdi zmdi-check"></i> Save</button>
+            <button class="btn bgm-gray btn-icon-text waves-effect" data-ng-click="cancel()"><i class="zmdi zmdi-close"></i> Cancel</button>
+        </div>
+    </script>
+
+    <div class="card">
+        <div class="lv-header-alt clearfix m-b-5">
+            <h2 class="lvh-label hidden-xs">{{leaguectrl.League.count}} Leagues</h2>
+
+            <div class="lvh-search" data-ng-if="leaguectrl.listviewSearchStat" data-ng-click="leaguectrl.listviewSearchStat">
+                <input type="text" placeholder="Start typing..." class="lvhs-input">
+
+                <i class="lvh-search-close" data-ng-click="leaguectrl.listviewSearchStat = false">&times;</i>
+            </div>
+
+            <ul class="lv-actions actions">
+                <li>
+                    <a href="" data-ng-click="leaguectrl.listviewSearchStat = true">
+                        <i class="zmdi zmdi-search"></i>
+                    </a>
+                </li>
+                <li class="dropdown" dropdown="">
+                    <a href="" dropdown-toggle="" aria-expanded="false" aria-haspopup="true">
+                        <i class="zmdi zmdi-sort"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="">Last Modified</a>
+                        </li>
+                        <li>
+                            <a href="">Last Edited</a>
+                        </li>
+                        <li>
+                            <a href="">Name</a>
+                        </li>
+                        <li>
+                            <a href="">Date</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="card-body card-padding">
+
+            <div class="contacts clearfix row">
+                <div class="col-md-2 col-sm-4 col-xs-6" data-ng-repeat="item in leaguectrl.League.items">
+                    <div class="c-item c-item--bongvl">
+                        <a data-ui-sref="pages.wall({filter:'tag',slug:'{{item.Slug}}'})" class="ci-avatar">
+                            <img data-ng-src="{{item.Logo}}" alt="{{item.FullName}}">
+                        </a>
+
+                        <div class="c-info">
+                            <strong>{{item.FullName}}</strong>
+                            <small>{{item.ShortName}} - {{item.NickName}}</small>
+                            <small>{{item.SearchCount}} Searchs | {{item.PostCount}} Posts</small>
+                        </div>
+
+                        <div class="c-footer">
+                            <button class="waves-effect"><i class="zmdi zmdi-favorite-outline"></i></button>
+                            <button class="waves-effect" data-ng-click="leaguectrl.open(item)" data-ng-if="onepiecectrl.authentication.isAdmin"><i class="zmdi zmdi-edit"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more" data-ng-if="leaguectrl.League.count > leaguectrl.League.items.length">
+                <a href="" data-ng-click="leaguectrl.League.nextPage()"><i class="zmdi zmdi-refresh-alt"></i> Load More...</a>
+            </div>
+        </div>
+    </div>
+</div>

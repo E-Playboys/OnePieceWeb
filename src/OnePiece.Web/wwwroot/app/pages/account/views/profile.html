@@ -1,0 +1,125 @@
+﻿<div data-ng-controller="profileCtrl as pctrl" class="container">
+
+  <div class="block-header">
+    <h2>{{pctrl.currentUserInfo.DisplayName}} <small>last login at {{pctrl.currentUserInfo.LastLogin}}</small></h2>
+
+    <ul class="actions m-t-20 hidden-xs">
+      <li class="dropdown" uib-dropdown>
+        <a href="" uib-dropdown-toggle>
+          <i class="zmdi zmdi-more-vert"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <a href="">Privacy Settings</a>
+          </li>
+          <li>
+            <a href="">Account Settings</a>
+          </li>
+          <li>
+            <a href="">Other Settings</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card" id="profile-main">
+    <div class="pm-overview c-overflow">
+      <div class="pmo-pic">
+        <input type="file" nv-file-select="" uploader="pctrl.uploader" id="avaUploader" class="wall-uploader" accept="image/jpg, image/png, image/jpeg, img/bmp"/>
+        <div class="p-relative">
+          <a href="">
+            <img class="img-responsive" src="{{pctrl.currentUserInfo.Avatar}}" alt="{{pctrl.currentUserInfo.DisplayName}}">
+          </a>
+
+          <div class="dropdown pmop-message" uib-dropdown>
+            <button uib-dropdown-toggle class="btn bgm-white btn-float">
+              <i class="zmdi zmdi-comment-text-alt"></i>
+            </button>
+
+            <div class="dropdown-menu stop-propagate">
+              <textarea placeholder="Write something..."></textarea>
+
+              <button class="btn bgm-green btn-icon"><i class="zmdi zmdi-mail-send"></i></button>
+            </div>
+          </div>
+
+          <a  data-ng-if="!pctrl.IsAnotherProfile" href="" ng-click="pctrl.changeAvatar()" class="pmop-edit">
+            <i class="zmdi zmdi-camera"></i> <span class="hidden-xs">Cập nhật ảnh đại diện</span>
+          </a>
+        </div>
+
+
+        <div class="pmo-stat">
+          <h2 class="m-0 c-white">1562</h2>
+          Tổng like đã câu
+        </div>
+      </div>
+
+      <div class="pmo-block pmo-contact hidden-xs">
+        <h2>Thông tin liên lạc</h2>
+
+        <ul>
+          <li data-ng-if="pctrl.currentUserInfo.PhoneNumber"><i class="zmdi zmdi-phone"></i> {{ pctrl.currentUserInfo.PhoneNumber }}</li>
+          <li data-ng-if="pctrl.currentUserInfo.Email"><i class="zmdi zmdi-email"></i> {{ pctrl.currentUserInfo.Email }}</li>
+          <li data-ng-if="pctrl.currentUserInfo.FacebookAccount"><i class="zmdi zmdi-facebook-box"></i> {{ pctrl.currentUserInfo.FacebookAccount }}</li>
+          <li data-ng-if="pctrl.currentUserInfo.TwitterAccount"><i class="zmdi zmdi-twitter"></i> {{ pctrl.currentUserInfo.TwitterAccount }}</li>
+          <li data-ng-if="pctrl.currentUserInfo.GoogleAccount"><i class="zmdi zmdi-google-plus"></i> {{ pctrl.currentUserInfo.GoogleAccount }}</li>
+          <li data-ng-if="pctrl.currentUserInfo.YahooAccount"><i class="zmdi zmdi-email-open"></i> {{ pctrl.currentUserInfo.YahooAccount }}</li>
+          <li data-ng-if="pctrl.currentUserInfo.JoinedDate"><i class="zmdi zmdi-daydream-setting"></i> {{pctrl.currentUserInfo.JoinedDate}}</li>
+        </ul>
+      </div>
+
+      <div class="pmo-block pmo-items hidden-xs">
+        <h2>Post tags</h2>
+
+        <div class="pmob-body">
+          <div class="row">
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/1.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/2.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/3.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/4.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/5.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/6.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/7.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/8.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/1.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/2.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/3.jpg" alt="">
+            </a>
+            <a href="" class="col-xs-2">
+              <img class="img-circle" src="wwwroot/img/profile-pics/4.jpg" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pm-body clearfix">
+      <ul class="tab-nav tn-justified" data-ng-include="'wwwroot/app/template/profile-menu.html'"></ul>
+      <data ui-view></data>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,225 @@
+﻿<div class="container wall" data-ng-controller="gagCtrl as gctrl">
+
+    <div class="row">
+        <div class="col-md-8 wall-list">
+
+            <button id="btnWallPosting" class="btn btn-float btn-danger m-btn hidden-xs" data-ng-if="onepiecectrl.authentication.isAuth" data-ng-click="gctrl.showPostingForm()">
+                <i class="zmdi zmdi-plus"></i>
+            </button>
+
+            <div class="card" data-ng-if="!gctrl.Gag.busy">
+                <gag gag=gctrl.Gag.item single="true"></gag>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+              <div class="card-header ch-alt">
+                <h2>{{gctrl.Gag.item.CommentCount}} {{'comment' | stringRes}}</h2>
+                <ul class="actions">
+                  <li>
+                    <a href="">
+                      <i class="zmdi zmdi-refresh-alt"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body wall-comment-list bgm-white">
+                <div class="media p-10" data-ng-repeat="comment in gctrl.Gag.item.CommentList.items | orderBy:'-CreatedDate'">
+                  <a href="" data-ui-sref="pages.profile.about({username: comment.CreatedUserName})" class="pull-left">
+                    <img data-ng-src="{{comment.CreatedUserAvatar | resize:48}}" alt="" class="lv-img-sm">
+                  </a>
+
+                  <div class="media-body">
+                    <a href="" data-ui-sref="pages.profile.about({username: comment.CreatedUserName})" class="a-title">{{comment.CreatedUserDisplayName}}</a> <small class="c-gray m-l-10">{{comment.CreatedDate | moment}}</small>
+                    <p class="m-t-5 m-b-0">{{comment.Content}}</p>
+                  </div>
+
+                  <ul class="actions m-r-20">
+                    <li class="dropdown" uib-dropdown="">
+                      <a href="" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                        <i class="zmdi zmdi-more-vert"></i>
+                      </a>
+
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                          <a href="">Report</a>
+                        </li>
+                        <li>
+                          <a href="">Delete</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+                <a class="wcl-load-more" href="" data-ng-if="gctrl.Gag.item.CommentCount > gctrl.Gag.item.CommentList.items.length" data-ng-click="gctrl.Gag.item.CommentList.nextPage()">Load more {{gctrl.Gag.item.CommentCount - gctrl.Gag.item.CommentList.items.length}} comments.</a>           
+              </div>
+              <div class="wcl-form p-10 bgm-lightgray">
+                <div class="wc-comment">
+                  <div class="wcc-inner">
+                    <textarea class="wcci-text" data-ng-model="gctrl.newComment.Content" data-auto-size placeholder="Write Something..." enter-key="gctrl.sendComment()"></textarea>
+                    <i class="zmdi zmdi-mail-send ng-class:{'active': gctrl.newComment.Content.length >= 10}" data-ng-click="gctrl.sendComment()"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card picture-list">
+              <div class="card-header">
+                <h2>{{'sameTagsGags' | stringRes}} <small>{{'sameTagsGagsDescription' | stringRes}}</small></h2>
+
+                <ul class="actions">
+                  <li class="dropdown action-show" uib-dropdown>
+                    <a href="" uib-dropdown-toggle>
+                      <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li>
+                        <a href="">Refresh</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="pl-body">
+                <div class="col-xs-6 square" data-ng-repeat="gag in gctrl.Gag.item.SameTagsGags">
+                  <a href="" data-ui-sref="pages.gag({slug: gag.Slug})">
+                    <img data-ng-if="gag.Images.length > 0" data-ng-src="{{gag.Images[0].Url}}" alt="">
+                    <img data-ng-if="gag.Videos.length > 0" data-ng-src="{{gag.Videos[0].Picture}}" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card picture-list">
+              <div class="card-header">
+                <h2>{{'sameUserGags' | stringRes}} {{gctrl.Gag.item.CreatedUserName}}<small>{{'sameUserGagsDescription' | stringRes}} {{gctrl.Gag.item.CreatedUserName}}</small></h2>
+
+                <ul class="actions">
+                  <li class="dropdown action-show" uib-dropdown>
+                    <a href="" uib-dropdown-toggle>
+                      <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li>
+                        <a href="">Refresh</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="pl-body">
+                <div class="col-xs-6 square" data-ng-repeat="gag in gctrl.Gag.item.SameUserGags">
+                  <a href="" data-ui-sref="pages.gag({slug: gag.Slug})">
+                    <img data-ng-if="gag.Images.length > 0" data-ng-src="{{gag.Images[0].Url}}" alt="">
+                    <img data-ng-if="gag.Videos.length > 0" data-ng-src="{{gag.Videos[0].Picture}}" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2>BongVL.vn<small>Cười thả ga với tin tức bóng đa</small></h2>
+              </div>
+              <div class="card-body card-padding">
+                <div class="pmo-contact">
+                  <ul>
+                    <li class="ng-binding"><i class="zmdi zmdi-email"></i> info@bongvl.vn</li>
+                    <li class="ng-binding"><i class="zmdi zmdi-facebook-box"></i> bongvl.vn</li>
+                    <li class="ng-binding"><i class="zmdi zmdi-twitter"></i> @bongvl (twitter.com/bongvl)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="addPostForm">
+    <div class="modal-body">
+        <div class="row">
+            <div class="card-body card-padding">
+                <div class="form-group">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" data-ng-attr-placeholder="{{'titlePlaceHolder' | stringRes}}" data-ng-model="newPost.Title">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="fg-line">
+                    <textarea class="form-control" data-auto-size placeholder="Description..." data-ng-model="newPost.Description"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="fg-line">
+                    <tags-input class="form-control gag-tags" ng-model="newPost.Tags" template="tag-template" display-property="Name" replace-spaces-with-dashes="false">
+                      <auto-complete max-results-to-show="5" load-on-focus="false" load-on-empty="true" source="Tags.getAutoCompleteTags($query)" template="autocomplete-template"></auto-complete>
+                    </tags-input>
+                  </div>
+                </div>
+
+                <div class="form-group" data-ng-if="wallVideo">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" placeholder="Link..." data-ng-model="newPost.Videos[0].Url">
+                  </div>
+                </div>
+                <div class="fg-line">
+                  <input type="file" nv-file-select uploader="gagUploader" multiple id="uploader" class="wall-uploader" accept="{{acceptFileFormats}}" />
+
+                  <ul class="list-unstyled clearfix wpb-actions">
+                    <li class="wpba-attrs">
+                      <ul class="list-unstyled list-inline m-l-0 m-t-5">
+                        <li><a title="Upload Image" data-wpba="image" href="" data-ng-class="{ 'active': wallImage }" data-ng-click="wallGif = false; wallVideo = false; selectFiles();"><i class="zmdi zmdi-image"></i></a></li>
+                        <li><a title="Upload Gif/MP4" data-wpba="gif" href="" data-ng-class="{ 'active': wallGif }" data-ng-click="wallImage = false; wallVideo = false; selectGif();"><i class="zmdi zmdi-collection-image-o"></i></a></li>
+                        <li><a title="Share Video Link" data-wpba="video" href="" data-ng-class="{ 'active': wallVideo }" data-ng-click="wallVideo = true; wallImage = false; wallGif = false;"><i class="zmdi zmdi-tv-play"></i></a></li>
+                      </ul>
+                    </li>
+
+                    <li class="pull-right">
+                      <button class="btn btn-primary btn-sm" data-ng-click="post()" data-ng-disabled="gagUploader.queue.length == 0 && !wallVideo">Post</button>
+                    </li>
+                    <li class="pull-right">
+                      <button class="btn btn-warning btn-sm" style="margin-right: 15px;" data-ng-show="gagUploader.queue.length > 0" data-ng-click="clear()">Clear</button>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <gag gag=newPost></gag>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</script>
+
+<script type="text/ng-template" id="tag-template">
+    <div class="tag-template">
+        <div class="left-panel">
+            <img ng-src="{{data.Avatar}}" />
+        </div>
+        <div class="right-panel">
+            <span>{{$getDisplayText()}}</span>
+            <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="autocomplete-template">
+    <div class="autocomplete-template">
+        <div class="left-panel">
+            <img ng-src="{{data.Avatar}}" />
+        </div>
+        <div class="right-panel">
+            <span ng-bind-html="$highlight($getDisplayText())"></span>
+            <span>{{data.Name}}</span>
+        </div>
+    </div>
+</script>

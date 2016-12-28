@@ -1,0 +1,201 @@
+﻿<div class="pmb-block">
+  <div class="pmbb-header">
+    <h2><i class="zmdi zmdi-account-box m-r-5"></i> Thông tin người dùng</h2>
+
+    <ul class="actions" data-ng-if="pctrl.editInfo === 0 && !pctrl.IsAnotherProfile">
+      <li class="dropdown" uib-dropdown>
+        <a href="" uib-dropdown-toggle>
+          <i class="zmdi zmdi-more-vert"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <a data-ng-click="pctrl.editInfo = 1" href="">Cập nhật</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="pmbb-body p-l-30">
+    <div class="pmbb-view" data-ng-if="pctrl.editInfo === 0">
+      <dl class="dl-horizontal">
+        <dt>Họ và tên</dt>
+        <dd>{{ pctrl.currentUserInfo.DisplayName }}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Giới tính</dt>
+        <dd>
+          {{ pctrl.userGenger.name }}
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Ngày sinh</dt>
+        <dd>{{ pctrl.currentUserInfo.DateOfBirth }}</dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Mật khẩu</dt>
+        <dd>***</dd>
+      </dl>
+    </div>
+
+    <form data-ng-submit="pctrl.updateUserInfo()" class="pmbb-edit" data-ng-if="pctrl.editInfo === 1">
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Họ</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.LastName" type="text" class="form-control" value="{{ pctrl.currentUserInfo.LastName }}" placeholder="eg. Họ">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Tên</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.FirstName" type="text" class="form-control" value="{{ pctrl.currentUserInfo.FirstName }}" placeholder="eg. Tên và tên đệm">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Giới tính</dt>
+        <dd>
+          <div class="fg-line">
+            <select class="form-control" ng-model="pctrl.userGenger" ng-options="option.name for option in pctrl.genderOptions track by option.value">
+            </select>
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Ngày sinh</dt>
+        <dd>
+          <div class="dtp-container dropdown fg-line">
+            <input type='text' data-ng-model="pctrl.currentUserInfo.DateOfBirth" class="form-control" data-dt-picker="DD/MM/YYYY" uib-dropdown-toggle placeholder="eg. dd/mm/yyyy">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Mật khẩu</dt>
+        <dd>
+          <div class="fg-line">
+            <input type="password" data-ng-model="pctrl.oldPassword" class="form-control" placeholder="Mật khẩu cũ" />
+          </div>
+          <div class="fg-line">
+            <input type="password" data-ng-model="pctrl.newPassword" class="form-control" placeholder="Mật khẩu mới" />
+          </div>
+          <div class="fg-line">
+            <input type="password" data-ng-model="pctrl.newPasswordRetype" class="form-control" placeholder="Nhập lại mật khẩu" />
+          </div>
+        </dd>
+      </dl>
+
+      <div class="m-t-30">
+        <button class="btn btn-primary btn-sm" type="submit">Save</button>
+        <button class="btn btn-link btn-sm" data-ng-click="pctrl.editInfo = 0">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="pmb-block">
+  <div class="pmbb-header">
+    <h2><i class="zmdi zmdi-phone m-r-5"></i> Thông tin liên lạc</h2>
+
+    <ul class="actions" data-ng-if="pctrl.editContact === 0 && !pctrl.IsAnotherProfile">
+      <li class="dropdown" uib-dropdown>
+        <a href="" uib-dropdown-toggle>
+          <i class="zmdi zmdi-more-vert"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <a data-ng-click="pctrl.editContact = 1" href="">Cập nhật</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="pmbb-body p-l-30">
+    <div class="pmbb-view" data-ng-if="pctrl.editContact === 0">
+      <dl data-ng-if="pctrl.currentUserInfo.PhoneNumber !== null" class="dl-horizontal">
+        <dt>Điện thoại</dt>
+        <dd>{{ pctrl.currentUserInfo.PhoneNumber }}</dd>
+      </dl>
+      <dl data-ng-if="pctrl.currentUserInfo.Email !== null" class="dl-horizontal">
+        <dt>Email</dt>
+        <dd>{{ pctrl.currentUserInfo.Email }}</dd>
+      </dl>
+      <dl data-ng-if="pctrl.currentUserInfo.FacebookAccount !== null" class="dl-horizontal">
+        <dt>Facebook</dt>
+        <dd>{{ pctrl.currentUserInfo.FacebookAccount }}</dd>
+      </dl>
+      <dl data-ng-if="pctrl.currentUserInfo.TwitterAccount !== null" class="dl-horizontal">
+        <dt>Twitter</dt>
+        <dd>{{ pctrl.currentUserInfo.TwitterAccount }}</dd>
+      </dl>
+      <dl data-ng-if="pctrl.currentUserInfo.GoogleAccount !== null" class="dl-horizontal">
+        <dt>Google</dt>
+        <dd>{{ pctrl.currentUserInfo.GoogleAccount }}</dd>
+      </dl>
+      <dl data-ng-if="pctrl.currentUserInfo.YahooAccount !== null" class="dl-horizontal">
+        <dt>Yahoo</dt>
+        <dd>{{ pctrl.currentUserInfo.YahooAccount }}</dd>
+      </dl>
+    </div>
+
+    <form data-ng-submit="pctrl.updateUserInfo()" class="pmbb-edit" data-ng-if="pctrl.editContact === 1">
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Điện thoại</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.PhoneNumber" type="text" class="form-control" placeholder="eg. 090123456789">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Email</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.Email" type="email" class="form-control" placeholder="eg. malinda.h@gmail.com">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Facebook</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.FacebookAccount" type="text" class="form-control" placeholder="eg. @malinda">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Twitter</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.TwitterAccount" type="text" class="form-control" placeholder="eg. @malinda">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Google</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.GoogleAccount" type="text" class="form-control" placeholder="eg. malinda.hollaway">
+          </div>
+        </dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt class="p-t-10">Yahoo</dt>
+        <dd>
+          <div class="fg-line">
+            <input data-ng-model="pctrl.currentUserInfo.YahooAccount" type="text" class="form-control" placeholder="eg. malinda.hollaway">
+          </div>
+        </dd>
+      </dl>
+
+      <div class="m-t-30">
+        <button class="btn btn-primary btn-sm" type="submit">Save</button>
+        <button class="btn btn-link btn-sm" data-ng-click="pctrl.editContact = 0">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

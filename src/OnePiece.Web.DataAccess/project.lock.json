@@ -6847,13 +6847,13 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 1.1.0",
-      "Microsoft.EntityFrameworkCore >= 1.1.0",
-      "Microsoft.EntityFrameworkCore.Relational >= 1.1.0",
-      "Microsoft.Extensions.Configuration >= 1.1.0",
-      "Microsoft.Extensions.Configuration.Json >= 1.1.0",
-      "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.1.0",
-      "NETStandard.Library >= 1.6.1"
+      "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 1.1.*",
+      "Microsoft.EntityFrameworkCore >= 1.1.*",
+      "Microsoft.EntityFrameworkCore.Relational >= 1.1.*",
+      "Microsoft.Extensions.Configuration >= 1.1.*",
+      "Microsoft.Extensions.Configuration.Json >= 1.1.*",
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.1.*",
+      "NETStandard.Library >= 1.6.*"
     ],
     ".NETStandard,Version=v1.6": []
   },

@@ -1,0 +1,140 @@
+﻿<div class="container wall" data-ng-controller="wallCtrl as wctrl">
+
+    <div class="row">
+        <div class="col-md-8 wall-list" infinite-scroll='wctrl.Gag.nextPage()' infinite-scroll-disabled='wctrl.Gag.busy' infinite-scroll-distance='2'>
+
+            <button id="btnWallPosting" class="btn btn-float btn-danger m-btn hidden-xs" data-ng-if="onepiecectrl.authentication.isAuth" data-ng-click="wctrl.showPostingForm()">
+                <i class="zmdi zmdi-plus"></i>
+            </button>
+
+            <a id="newGags" scroll-hide data-ui-sref="pages.wall({filter:'',slug:''})" data-ng-click="onepiecectrl.sidebarStat($event)" data-ng-if="wctrl.Gag.slug" class="btn bgm-blue btn-icon-text waves-effect"><i class="zmdi zmdi-refresh"></i>New Gags</a>
+         
+            <div class="card profile-view" data-ng-if="wctrl.CurrentTag">
+                <div class="pv-header">
+                    <img data-ng-src="{{wctrl.CurrentTag.item.Avatar}}" class="pv-main" alt="">
+                </div>
+
+                <div class="pv-body">
+                    <h2>{{wctrl.CurrentTag.item.FullName}}</h2>
+                    <small>{{wctrl.CurrentTag.item.Name}} | {{wctrl.CurrentTag.item.NickName}}</small>
+
+                    <ul class="pv-follow m-b-0">
+                        <li>{{wctrl.CurrentTag.item.SearchCount}} Searchs</li>
+                        <li>{{wctrl.CurrentTag.item.PostCount}} Posts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" data-ng-repeat="gag in wctrl.Gag.items | orderBy:'-PublishedDate'">
+                <gag gag=gag></gag>
+            </div>
+        </div>
+
+        <div data-ng-if="!wctrl.isMobile" class="col-md-4 hidden-sm hidden-xs">
+
+            <top-tag tags=wctrl.PlayerTags.items header="Top Players" sub-header="List of most popular Players"></top-tag>
+
+            <top-tag tags=wctrl.TeamTags.items header="Top Teams" sub-header="List of most popular Teams"></top-tag>
+
+            <top-tag tags=wctrl.LeagueTags.items header="Top Leagues" sub-header="List of most popular Leagues"></top-tag>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>BongVL.vn<small>Cười thả ga với tin tức bóng đa</small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div class="pmo-contact">
+                        <ul>
+                            <li class="ng-binding"><i class="zmdi zmdi-email"></i> info@bongvl.vn</li>
+                            <li class="ng-binding"><i class="zmdi zmdi-facebook-box"></i> bongvl.vn</li>
+                            <li class="ng-binding"><i class="zmdi zmdi-twitter"></i> @bongvl (twitter.com/bongvl)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="addPostForm">
+    <div class="modal-body">
+        <div class="row">
+            <div class="card-body card-padding">
+                <div class="form-group">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" data-ng-attr-placeholder="{{'titlePlaceHolder' | stringRes}}" data-ng-model="newPost.Title">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="fg-line">
+                    <textarea class="form-control" data-auto-size placeholder="Description..." data-ng-model="newPost.Description"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="fg-line">
+                    <tags-input class="form-control gag-tags" ng-model="newPost.Tags" template="tag-template" display-property="Name" replace-spaces-with-dashes="false">
+                      <auto-complete max-results-to-show="5" load-on-focus="false" load-on-empty="true" source="Tags.getAutoCompleteTags($query)" template="autocomplete-template"></auto-complete>
+                    </tags-input>
+                  </div>
+                </div>
+
+                <div class="form-group" data-ng-if="wallVideo">
+                  <div class="fg-line">
+                    <input type="text" class="form-control" placeholder="Link..." data-ng-model="newPost.Videos[0].Url">
+                  </div>
+                </div>
+                <div class="fg-line">
+                  <input type="file" nv-file-select uploader="gagUploader" multiple id="uploader" class="wall-uploader" accept="{{acceptFileFormats}}" />
+
+                  <ul class="list-unstyled clearfix wpb-actions">
+                    <li class="wpba-attrs">
+                      <ul class="list-unstyled list-inline m-l-0 m-t-5">
+                        <li><a title="Upload Image" data-wpba="image" href="" data-ng-class="{ 'active': wallImage }" data-ng-click="wallGif = false; wallVideo = false; selectFiles();"><i class="zmdi zmdi-image"></i></a></li>
+                        <li><a title="Upload Gif/MP4" data-wpba="gif" href="" data-ng-class="{ 'active': wallGif }" data-ng-click="wallImage = false; wallVideo = false; selectGif();"><i class="zmdi zmdi-collection-image-o"></i></a></li>
+                        <li><a title="Share Video Link" data-wpba="video" href="" data-ng-class="{ 'active': wallVideo }" data-ng-click="wallVideo = true; wallImage = false; wallGif = false;"><i class="zmdi zmdi-tv-play"></i></a></li>
+                      </ul>
+                    </li>
+
+                    <li class="pull-right">
+                      <button class="btn btn-primary btn-sm" data-ng-click="post()" data-ng-disabled="gagUploader.queue.length == 0 && !wallVideo">Post</button>
+                    </li>
+                    <li class="pull-right">
+                      <button class="btn btn-warning btn-sm" style="margin-right: 15px;" data-ng-show="gagUploader.queue.length > 0" data-ng-click="clear()">Clear</button>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <gag gag=newPost></gag>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</script>
+
+<script type="text/ng-template" id="tag-template">
+    <div class="tag-template">
+        <div class="left-panel">
+            <img ng-src="{{data.Avatar}}" />
+        </div>
+        <div class="right-panel">
+            <span>{{$getDisplayText()}}</span>
+            <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="autocomplete-template">
+    <div class="autocomplete-template">
+        <div class="left-panel">
+            <img ng-src="{{data.Avatar}}" />
+        </div>
+        <div class="right-panel">
+            <span ng-bind-html="$highlight($getDisplayText())"></span>
+            <span>{{data.Name}}</span>
+        </div>
+    </div>
+</script>

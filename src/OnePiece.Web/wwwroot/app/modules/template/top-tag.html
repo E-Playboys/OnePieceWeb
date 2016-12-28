@@ -1,0 +1,30 @@
+﻿<div class="card picture-list">
+    <div class="card-header">
+        <h2>{{header}} <small>{{subHeader}}</small></h2>
+
+        <ul class="actions">
+            <li class="dropdown action-show" uib-dropdown>
+                <a href="" uib-dropdown-toggle>
+                    <i class="zmdi zmdi-more-vert"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Refresh</a>
+                    </li>
+                    <li>
+                        <a href="">Danh sách tags</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="pl-body">
+        <div class="col-xs-2 lightbox-item" data-ng-repeat="tag in tags">
+            <a data-ui-sref="pages.wall({filter:'tag',slug:'{{tag.Slug}}'})">
+                <img class="lv-img" ng-src="{{tag.Avatar | resize:48}}" alt="{{tag.Name}}">
+            </a>
+        </div>
+    </div>
+</div>

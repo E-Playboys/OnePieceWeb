@@ -1,9 +1,9 @@
 ﻿{
   "ConnectionString": {
-    "Host": ".",
+    "Host": ".\\SQLEXPRESS",
     "Port": "0",
     "DbName": "OnePiece",
     "User": "sa",
-    "Password": "Asdcxz1+"
+    "Password": "123"
   }
 }

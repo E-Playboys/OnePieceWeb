@@ -1,0 +1,130 @@
+.card {
+    position: relative;
+    background: #CFD8DC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+
+    @media screen and (max-width: @screen-sm-max) {
+        margin-bottom: 10px;
+    }
+}
+
+.card-header {
+    position: relative;
+
+    &:not(.ch-alt) {
+        @media screen and (min-width: @screen-sm-min) {
+            padding: 23px 25px;
+        }
+
+        @media screen and (max-width: @screen-sm-max) {
+            padding: 18px;
+        }
+    }
+
+    &.card-header-posts {
+        min-height: 90px;
+    }
+
+    h2 { 
+        margin: 0;
+        line-height: 100%;
+        font-size: 17px;
+        font-weight: 400;
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #757575;
+            line-height: 160%;
+        }
+    }
+    
+    h4 { 
+        margin: 0;
+        line-height: 100%;
+        font-size: 13px;
+        font-weight: 500;
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #757575;
+            line-height: 160%;
+        }
+    } 
+
+    &.ch-alt {
+        @media screen and (min-width: @screen-sm-min) {
+            padding: 20px 23px;
+        } 
+
+        @media screen and (max-width: @screen-sm-max) {
+            padding: 18px 18px 28px;
+        }
+
+        &:not([class*="bgm-"]) {
+            background-color: #f7f7f7;
+        }
+    }
+
+    &[class*="bgm-"] {
+        h2, h2 small { 
+            color: #fff;
+        }
+    }
+
+    .actions {
+        position: absolute; 
+        right: 10px;
+        z-index: 2; 
+        top: 15px;
+    }
+
+    .btn-float {
+        right: 25px;
+        bottom: -23px;
+        z-index: 1;
+    }
+}
+
+.card-body {
+
+    &.card-posts {
+        height: 450px;
+    }
+
+    &.card-padding {
+        @media screen and (min-width: @screen-sm-min) {
+            padding: 23px 25px;
+        }
+
+        @media screen and (max-width: @screen-sm-max) {
+            padding: 18px;
+        }
+    }
+
+    &.card-padding-sm { 
+        padding: 15px;
+    }
+
+    h2 {
+        margin-top: 0;
+
+        a {
+            color: #000;
+
+            &:hover {
+                color: #2196f3;
+            }
+        }
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+.card-header:not(.ch-alt):not([class*="bgm-"]) + .card-padding {
+    padding-top: 0;
+}
