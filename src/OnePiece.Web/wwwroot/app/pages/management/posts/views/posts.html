@@ -1,0 +1,143 @@
+﻿<div class="container"  data-ng-controller="postMngCtrl as pmctrl">
+  <div class="card">
+    <div class="card-body card-padding">
+      <ul class="p-menu">
+        <li data-ui-sref-active="active"><a data-ui-sref="management.posts({filter: 'all', slug: ''})"><i class="zmdi zmdi-collection-folder-image hidden-xs"></i> All</a></li>
+        <li data-ui-sref-active="active"><a data-ui-sref="management.posts({filter: 'video', slug: ''})"><i class="zmdi zmdi-tv-play hidden-xs"></i> Videos</a></li>
+        <li data-ui-sref-active="active"><a data-ui-sref="management.posts({filter: 'gif', slug: ''})"><i class="zmdi zmdi-collection-image hidden-xs"></i> Gif</a></li>
+        <li data-ui-sref-active="active"><a data-ui-sref="management.posts({filter: 'image', slug: ''})"><i class="zmdi zmdi-image-o hidden-xs"></i> Hình</a></li>
+        <li class="pm-search">
+          <div class="pms-inner">
+            <i class="zmdi zmdi-search"></i>
+            <input type="text" placeholder="Tìm bài...">
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row" infinite-scroll='pmctrl.Gag.getAllGags()' infinite-scroll-disabled='pmctrl.Gag.busy'>
+    <div class="col-sm-4" ng-repeat="gag in pmctrl.Gag.items" >
+      <div class="card">
+        <div class="card-header card-header-posts bgm-cyan">
+          <h2>
+            {{ gag.Title }}
+          </h2>
+        </div>
+
+        <div class="card-body card-padding card-posts">
+          <div class="wall-img-preview lightbox clearfix" data-ng-if="gag.Images.length > 0">
+            <div data-ng-repeat="image in gag.Images" on-last-repeat="lightbox" class="wip-item" ng-attr-href="{{image.Url}}">
+              <img ng-src="{{image.Url}}" alt="">
+            </div>
+          </div>
+          <div class="wall-img-preview clearfix" data-ng-if="gag.Videos.length > 0" data-ng-repeat="video in gag.Videos">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" data-ng-src="{{video.Url | trustAsResourceUrl}}" data-ng-if="video.VideoType == 1 || video.VideoType == 2"></iframe>
+              <video controls="controls" preload="none" data-ng-if="video.VideoType == 0">
+                <source data-ng-src="{{video.Url | trustAsResourceUrl}}" />
+              </video>
+              <div class="fb-video" ng-attr-data-href="{{video.Url | trustAsResourceUrl}}" data-allowfullscreen="true" data-ng-if="video.VideoType == 3"></div>
+            </div>
+          </div>
+          <p>
+            {{ gag.Description }}
+          </p>
+          <ul class="wall-attrs clearfix list-inline list-unstyled">
+            <li class="wa-users" data-ng-if="gag.Tags.length > 0" data-ng-repeat="postTag in gag.Tags">
+              <a data-ui-sref="management.posts({filter:'tag',slug:'{{postTag.Slug}}'})"><img ng-src="{{postTag.Avatar}}" alt="{{postTag.Name}}" /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="lv-footer">
+          <button ng-if="gag.IsActived" ng-click="pmctrl.ApprovalPost(gag)" class="btn bgm-green"><i class="zmdi zmdi-check"></i> Đã duyệt</button>
+          <button ng-if="!gag.IsActived" ng-click="pmctrl.ApprovalPost(gag)" class="btn bgm-deeporange"><i class="zmdi zmdi-minus-circle"></i> Chưa duyệt</button>
+          <button data-ng-click="pmctrl.showPostingForm(gag)" class="btn btn-info"><i class="zmdi zmdi-edit"></i> Cập nhật</button>
+          <button data-ng-click="pmctrl.deletePost(gag)" class="btn btn-danger"><i class="zmdi zmdi-delete"></i> Xóa bài</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="editPostForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="card-body card-padding">
+        <div class="form-group">
+          <div class="fg-line">
+            <input type="text" class="form-control" data-ng-attr-placeholder="{{'titlePlaceHolder' | stringRes}}" data-ng-model="currentGag.Title">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="fg-line">
+            <textarea class="form-control" data-auto-size placeholder="Description..." data-ng-model="currentGag.Description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="fg-line">
+            <tags-input class="form-control gag-tags" ng-model="currentGag.Tags" template="tag-template" display-property="Name" replace-spaces-with-dashes="false">
+              <auto-complete max-results-to-show="5" load-on-focus="false" load-on-empty="true" source="Tags.getAutoCompleteTags($query)" template="autocomplete-template"></auto-complete>
+            </tags-input>
+          </div>
+        </div>
+
+        <div class="form-group" data-ng-if="wallVideo">
+          <div class="fg-line">
+            <input type="text" class="form-control" placeholder="Link..." data-ng-model="currentGag.Videos[0].Url">
+          </div>
+        </div>
+        <div class="fg-line">
+          <input type="file" nv-file-select uploader="gagUploader" multiple id="uploader" class="wall-uploader" accept="{{acceptFileFormats}}" />
+
+          <ul class="list-unstyled clearfix wpb-actions">
+            <li class="wpba-attrs">
+              <ul class="list-unstyled list-inline m-l-0 m-t-5">
+                <li><a title="Upload Image" data-wpba="image" href="" data-ng-class="{ 'active': wallImage }" data-ng-click="wallGif = false; wallVideo = false; selectFiles();"><i class="zmdi zmdi-image"></i></a></li>
+                <li><a title="Upload Gif/MP4" data-wpba="gif" href="" data-ng-class="{ 'active': wallGif }" data-ng-click="wallImage = false; wallVideo = false; selectGif();"><i class="zmdi zmdi-collection-image-o"></i></a></li>
+                <li><a title="Share Video Link" data-wpba="video" href="" data-ng-class="{ 'active': wallVideo }" data-ng-click="wallVideo = true; wallImage = false; wallGif = false;"><i class="zmdi zmdi-tv-play"></i></a></li>
+              </ul>
+            </li>
+
+            <li class="pull-right">
+              <button class="btn btn-primary btn-sm" data-ng-click="updatePost()">Cập nhật</button>
+            </li>
+            <li class="pull-right">
+              <button class="btn btn-warning btn-sm" style="margin-right: 15px;" data-ng-show="gagUploader.queue.length > 0" data-ng-click="clear()">Clear</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <gag gag=currentGag></gag>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+  </div>
+</script>
+
+<script type="text/ng-template" id="tag-template">
+  <div class="tag-template">
+    <div class="left-panel">
+      <img ng-src="{{data.Avatar}}" />
+    </div>
+    <div class="right-panel">
+      <span>{{$getDisplayText()}}</span>
+      <a class="remove-button" ng-click="$removeTag()">&#10006;</a>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="autocomplete-template">
+  <div class="autocomplete-template">
+    <div class="left-panel">
+      <img ng-src="{{data.Avatar}}" />
+    </div>
+    <div class="right-panel">
+      <span ng-bind-html="$highlight($getDisplayText())"></span>
+      <span>{{data.Name}}</span>
+    </div>
+  </div>
+</script>

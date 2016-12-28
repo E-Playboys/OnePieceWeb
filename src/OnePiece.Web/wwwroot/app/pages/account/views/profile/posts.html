@@ -1,0 +1,75 @@
+﻿﻿<div data-ng-controller="postCtrl as pctrl">
+    <div class="timeline" infinite-scroll='pctrl.Gag.nextPage()' infinite-scroll-disabled='pctrl.Gag.busy'>
+        <div class="p-header">
+            <ul class="p-menu">
+                <li data-ui-sref-active="active"><a data-ui-sref="pages.profile.posts({filter: 'all', slug: ''})"><i class="zmdi zmdi-collection-folder-image hidden-xs"></i> All</a></li>
+                <li data-ui-sref-active="active"><a data-ui-sref="pages.profile.posts({filter: 'video', slug: ''})"><i class="zmdi zmdi-tv-play hidden-xs"></i> Videos</a></li>
+                <li data-ui-sref-active="active"><a data-ui-sref="pages.profile.posts({filter: 'gif', slug: ''})"><i class="zmdi zmdi-collection-image hidden-xs"></i> Gif</a></li>
+                <li data-ui-sref-active="active"><a data-ui-sref="pages.profile.posts({filter: 'image', slug: ''})"><i class="zmdi zmdi-image-o hidden-xs"></i> Hình</a></li>
+                <li class="pm-search">
+                    <div class="pms-inner">
+                        <i class="zmdi zmdi-search"></i>
+                        <input type="text" placeholder="Tìm bài...">
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="actions m-t-20 hidden-xs">
+                <li class="dropdown" dropdown>
+                    <a href="" dropdown-toggle>
+                        <i class="zmdi zmdi-more-vert"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="">Refresh</a>
+                        </li>
+                        <li>
+                            <a href="">Settings</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="card t-view" data-tv-type="image" data-ng-repeat="gag in pctrl.Gag.items">
+            <gag gag=gag></gag>
+            <button data-ng-show="!gag.$edit" data-ng-click="gag.$edit = true;" class="btn btn-info waves-effect">Sửa bài</button>
+            <fieldset data-ng-disabled="pctrl.isShowProgressBar">
+                <div class="dropdown p-post-editing" data-ng-class="{ 'hidden': !gag.$edit, 'open' : gag.$edit }">
+                    <div class="dropdown-menu stop-propagate">
+
+                        <div class="col-sm-12 wall-posting-close">
+                            <a data-ng-click="gag.$edit = false;" href="" title="Close" class="pull-right">
+                                <i class="zmdi zmdi-close"></i>
+                            </a>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body card-padding">
+
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control" placeholder="Title..." data-ng-model="gag.Title">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <textarea class="form-control" data-auto-size placeholder="Description..." data-ng-model="gag.Description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul class="list-unstyled clearfix wpb-actions">
+                                <li class="pull-right">
+                                    <button class="btn btn-primary btn-sm" data-ng-click="pctrl.updatePost(gag)" data-ng-disabled="">Cập nhật</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>

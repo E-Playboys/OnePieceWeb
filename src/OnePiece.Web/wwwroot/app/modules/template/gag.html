@@ -1,0 +1,119 @@
+﻿<div data-ng-class="{'card-header': true, 'ch-alt': single}">
+    <div class="media">
+        <div class="pull-left">
+            <a data-ui-sref="pages.profile.about({username: gag.CreatedUserName})">
+                <img class="lv-img" data-ng-src="{{gag.CreatedUserAvatar | resize:48}}" alt="">
+            </a>
+        </div>
+
+        <div class="media-body m-t-5">
+            <h4><a href="" data-ui-sref="pages.profile.about({username: gag.CreatedUserName})" class="a-title">{{gag.CreatedUserDisplayName}}</a> <small>{{'postOn' | stringRes}} {{gag.PublishedDate | moment}}</small></h4>
+        </div>
+    </div>
+
+    <ul class="actions">
+        <li class="action-show">
+          <button data-ng-if="single && gag.BackGagSlug" class="btn btn-default waves-effect" data-ui-sref="pages.gag({slug: gag.BackGagSlug})"><i class="zmdi zmdi-arrow-back"></i><span class="hidden-xs m-l-5 m-t-1">{{'back' | stringRes}}</span></button>
+          <a href="" data-ng-if="!single" ng-click="shareToGooglePlus()"><i class="zmdi zmdi-google"></i></a>
+        </li>
+        <li class="action-show">
+          <button data-ng-if="single && gag.ForwardGagSlug" class="btn btn-danger waves-effect" data-ui-sref="pages.gag({slug: gag.ForwardGagSlug})"><span class="hidden-xs m-r-5 m-t-1">{{'forward' | stringRes}}</span><i class="zmdi zmdi-arrow-forward"></i></button>
+          <a href="" data-ng-if="!single" ng-click="shareToFacebook()"><i class="zmdi zmdi-facebook"></i></a>
+        </li>
+        <!--<li class="dropdown action-show" uib-dropdown>
+
+            <a href="" uib-dropdown-toggle>
+                <i class="zmdi zmdi-share"></i>
+            </a>
+
+            <ul class="dropdown-menu dm-icon pull-right">
+                <li>
+                    <a href="" ng-click="shareToFacebook()"><i class="zmdi zmdi-facebook"></i>Facebook</a>
+                </li>
+                <li>
+                    <a href="" ng-click="shareToGooglePlus()"><i class="zmdi zmdi-google"></i>Google Plus</a>
+                </li>
+            </ul>
+        </li>-->
+    </ul>
+</div>
+
+<div class="card-body card-padding">
+    <h2 ng-if="gag.Title"><a data-ui-sref="pages.gag({slug: gag.Slug})">{{gag.Title}}</a></h2>
+    <p ng-if="gag.Description">{{gag.Description}}</p>
+
+    <div class="wall-img-preview lightbox clearfix" data-ng-if="gag.Images.length > 0">
+        <div data-ng-repeat="image in gag.Images" on-last-repeat="lightbox" class="wip-item" ng-attr-href="{{image.Url}}">
+            <img ng-src="{{image.Url}}" alt="">
+        </div>
+    </div>
+    <div class="wall-img-preview clearfix" data-ng-if="gag.Videos.length > 0" data-ng-repeat="video in gag.Videos">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" data-ng-src="{{video.Url | trustAsResourceUrl}}" data-ng-if="video.VideoType == 1 || video.VideoType == 2"></iframe>
+            <video controls="controls" preload="none" data-ng-if="video.VideoType == 0">
+                <source data-ng-src="{{video.Url | trustAsResourceUrl}}" />
+            </video>
+            <div class="fb-video" ng-attr-data-href="{{video.Url | trustAsResourceUrl}}" data-allowfullscreen="true" data-ng-if="video.VideoType == 3"></div>
+        </div>
+    </div>
+
+    <ul class="wall-attrs clearfix list-inline list-unstyled">
+        <li class="wa-stats">
+            <span data-ng-if="single" class="waves-effect waves-circle bgm-blue" ng-click="shareToFacebook()"><i class="zmdi zmdi-facebook c-white"></i></span>
+            <!--<span class="waves-effect waves-circle bgm-red" ng-click="shareToGooglePlus()"><i class="zmdi zmdi-google c-white"></i></span>-->
+            <span class="p-10 waves-effect waves-circle favorite ng-class:{'active': gag.Liked}" data-ng-click="toggleLike()"><i class="zmdi zmdi-favorite"></i></span><i class="count">{{gag.LikeCount}}</i>
+            <span data-ng-if="!single" class="waves-effect waves-circle comment ng-class:{'active': newComment.Commenting}" data-ng-click="newComment.Commenting = !newComment.Commenting"><i class="zmdi zmdi-comments"></i></span><i data-ng-if="!single" class="count">{{gag.CommentCount}}</i>
+        </li>
+
+        <li class="wa-users" data-ng-if="gag.Tags.length > 0" data-ng-repeat="postTag in gag.Tags">
+            <a data-ui-sref="pages.wall({filter:'tag',slug:'{{postTag.Slug}}'})"><img ng-src="{{postTag.Avatar}}" alt="{{postTag.Name}}" /></a>
+        </li>
+    </ul>
+</div>
+
+<div class="wall-comment-list" data-ng-if="!single">
+
+  <!-- Comment form -->
+  <div class="wcl-form" uib-collapse="!newComment.Commenting">
+    <div class="wc-comment">
+      <div class="wcc-inner">
+        <textarea class="wcci-text" data-ng-model="newComment.Content" data-auto-size placeholder="Write Something..." enter-key="sendComment()"></textarea>
+        <i class="zmdi zmdi-mail-send ng-class:{'active': newComment.Content.length >= 10}" data-ng-click="sendComment()"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment Listing -->
+  <div class="wcl-list" data-ng-show="gag.CommentList.items.length > 0">
+    <div class="media" data-ng-repeat="comment in gag.CommentList.items | orderBy:'-CreatedDate'">
+      <a href="" data-ui-sref="pages.profile.about({username: comment.CreatedUserName})" class="pull-left">
+        <img data-ng-src="{{comment.CreatedUserAvatar | resize:48}}" alt="" class="lv-img-sm">
+      </a>
+
+      <div class="media-body">
+        <a href="" data-ui-sref="pages.profile.about({username: comment.CreatedUserName})" class="a-title">{{comment.CreatedUserDisplayName}}</a> <small class="c-gray m-l-10">{{comment.CreatedDate | moment}}</small>
+        <p class="m-t-5 m-b-0">{{comment.Content}}</p>
+      </div>
+
+      <ul class="actions">
+        <li class="dropdown" uib-dropdown="">
+          <a href="" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+            <i class="zmdi zmdi-more-vert"></i>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+              <a href="">Report</a>
+            </li>
+            <li>
+              <a href="">Delete</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+  <a class="wcl-load-more" href="" data-ng-if="gag.CommentCount > gag.CommentList.items.length" data-ng-click="gag.CommentList.nextPage()">Load more {{gag.CommentCount - gag.CommentList.items.length}} comments.</a>
+</div>

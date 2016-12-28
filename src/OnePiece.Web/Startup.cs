@@ -117,7 +117,7 @@ namespace OnePiece.Web
             public ApplicationDbContext Create(DbContextFactoryOptions options)
             {
                 var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                builder.UseSqlServer("Server=.;Database=OnePiece;Integrated Security=true;User Id=sa;Password=Asdcxz1+;");
+                builder.UseSqlServer("Server=.\\SQLEXPRESS;Database=OnePiece;Integrated Security=true;User Id=sa;Password=123;");
                 return new ApplicationDbContext(builder.Options);
             }
         }

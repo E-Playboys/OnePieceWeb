@@ -1,0 +1,47 @@
+<div class="sidebar-inner c-overflow">
+  <div data-ng-if="onepiecectrl.authentication.isAuth" class="profile-menu">
+    <a href="" toggle-submenu>
+      <div class="profile-pic">
+        <img data-ng-src="{{onepiecectrl.authentication.userInfo.Avatar}}" alt="">
+      </div>
+
+      <div class="profile-info">
+        {{onepiecectrl.authentication.userInfo.DisplayName}}
+        <i class="zmdi zmdi-caret-down"></i>
+      </div>
+    </a>
+
+    <ul class="main-menu">
+      <li>
+        <a data-ui-sref="pages.profile.about({username: onepiecectrl.authentication.userName})" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-account"></i> View Profile</a>
+      </li>
+      <li>
+        <a href=""><i class="zmdi zmdi-input-antenna"></i> Privacy Settings</a>
+      </li>
+      <li>
+        <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
+      </li>
+      <li>
+        <a href="" data-ng-click="onepiecectrl.logOut()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="main-menu">
+    <li data-ui-sref-active="active">
+      <a data-ui-sref="pages.wall" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-home"></i> Home</a>
+    </li>
+    <li data-ui-sref-active="active">
+      <a data-ui-sref="pages.league" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-globe-alt"></i> Leagues</a>
+    </li>
+    <li data-ui-sref-active="active">
+        <a data-ui-sref="pages.team" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-flag"></i> Teams</a>
+    </li>
+    <li data-ui-sref-active="active">
+        <a data-ui-sref="pages.player" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-run"></i> Players</a>
+    </li>
+    <li data-ng-if="onepiecectrl.authentication.isAdmin" data-ui-sref-active="active">
+      <a data-ui-sref="management.posts" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-puzzle-piece"></i> Management</a>
+    </li>
+  </ul>
+</div>

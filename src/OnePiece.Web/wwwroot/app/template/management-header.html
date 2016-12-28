@@ -1,0 +1,170 @@
+<ul class="header-inner">
+    <li class="logo" data-ng-class="{ 'open': onepiecectrl.sidebarToggle.left === true }" data-ui-sref-active="active">
+        <a data-ui-sref="pages.wall({filter:'',slug:''})"><div class="logo-button"></div></a>
+    </li>
+
+    <li class="menu hidden-xs p-l-15 p-r-15" data-target="mainmenu" data-toggle-sidebar data-model-left="onepiecectrl.sidebarToggle.left">
+        <a href=""><i class="zmdi zmdi-menu f-25"></i></a>
+    </li>
+
+    <li class="menu hidden-sm hidden-md hidden-lg">
+        <a href="" data-target="mainmenu" data-toggle-sidebar data-model-left="onepiecectrl.sidebarToggle.left">
+            <i class="zmdi zmdi-menu f-22"></i>
+        </a>
+    </li>
+
+    <li class="menu m-r-5"></li>
+</ul>
+
+<ul class="sub-header-inner hidden-sm hidden-md hidden-lg">
+    <li class="menu" data-ui-sref-active="active">
+        <a data-ui-sref="pages.wall({filter:'image',slug:''})" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-image-o"></i> <span class="p-l-5">Image</span></a>
+    </li>
+
+    <li class="menu" data-ui-sref-active="active">
+        <a data-ui-sref="pages.wall({filter:'gif',slug:''})" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-collection-image-o"></i> <span class="p-l-5">Gif</span></a>
+    </li>
+
+    <li class="menu" data-ui-sref-active="active">
+        <a data-ui-sref="pages.wall({filter:'video',slug:''})" data-ng-click="onepiecectrl.sidebarStat($event)"><i class="zmdi zmdi-tv-play"></i> <span class="p-l-5">Video</span></a>
+    </li>
+</ul>
+
+<!-- Top Search Content -->
+<div id="top-search-wrap">
+    <input type="text" enter-key="hctrl.search()" data-ng-model="hctrl.searchText">
+    <i id="top-search-close" data-ng-click="hctrl.closeSearch()">&times;</i>
+</div>
+
+
+<script type="text/ng-template" id="loginForm">
+    <!-- Login -->
+    <div data-ng-controller="loginCtrl as lctrl">
+        <form name="LoginForm" class="lc-block lc-form" id="l-login" data-ng-class="{ 'toggled': loginTab }" data-ng-if="loginTab">
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                <div class="fg-line">
+                    <input type="text" name="userNameLogin" class="form-control" placeholder="Username" data-ng-model="loginForm.userName" enter-key="loginForm.submit(LoginForm)" validator="required,username" valid-method="watch" message-id="userNameLoginMessage">
+                    <span id="userNameLoginMessage"></span>
+                </div>
+            </div>
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+                <div class="fg-line">
+                    <input type="password" name="passwordLogin" class="form-control" placeholder="Password" data-ng-model="loginForm.password" enter-key="loginForm.submit(LoginForm)" validator="required" valid-method="watch" message-id="passwordLoginMessage">
+                    <span id="passwordLoginMessage"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="" data-ng-model="loginForm.useRefreshTokens">
+                    <i class="input-helper"></i>
+                    Keep me signed in
+                </label>
+            </div>
+            <a href="" class="btn btn-login btn-success btn-float" data-ng-click="loginForm.submit(LoginForm)"><i class="zmdi zmdi-arrow-forward"></i></a>
+            <a href="" class="btn btn-facebook-login btn-primary btn-float" data-ng-click="authExternalProvider('Facebook')"><i class="zmdi zmdi-facebook"></i></a>
+            <a href="" class="btn btn-google-login btn-danger btn-float" data-ng-click="authExternalProvider('Google')"><i class="zmdi zmdi-google"></i></a>
+            <ul class="login-navigation">
+                <li data-block="#l-register" class="bgm-red" data-ng-click="gotoTab('register')">Register</li>
+                <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="gotoTab('forgot')">Forgot Password?</li>
+            </ul>
+        </form>
+        <!-- Register -->
+        <form name="RegisterForm" class="lc-block lc-form" id="l-register" data-ng-class="{ 'toggled': registerTab }" data-ng-if="registerTab">
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                <div class="fg-line">
+                    <input type="text" name="userNameRegister" class="form-control" placeholder="Username" data-ng-model="registerForm.userName" enter-key="registerForm.submit(RegisterForm)" validator="required,username" valid-method="watch" message-id="userNameRegisterMessage">
+                    <span id="userNameRegisterMessage"></span>
+                </div>
+            </div>
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                <div class="fg-line">
+                    <input type="text" name="emailRegister" class="form-control" placeholder="Email Address" data-ng-model="registerForm.email" enter-key="registerForm.submit(RegisterForm)" validator="required,email" valid-method="watch" message-id="emailRegisterMessage">
+                    <span id="emailRegisterMessage"></span>
+                </div>
+            </div>
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+                <div class="fg-line">
+                    <input type="password" name="passwordRegister" class="form-control" placeholder="Password" data-ng-model="registerForm.password" enter-key="registerForm.submit(RegisterForm)" validator="required,minlength=6" valid-method="watch" message-id="passwordRegisterMessage">
+                    <span id="passwordRegisterMessage"></span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">
+                    <i class="input-helper"></i>
+                    Accept the license agreement
+                </label>
+            </div>
+            <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="registerForm.submit(RegisterForm)"><i class="zmdi zmdi-arrow-forward"></i></a>
+            <ul class="login-navigation">
+                <li data-block="#l-login" class="bgm-green" data-ng-click="gotoTab('login')">Login</li>
+                <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="gotoTab('forgot')">Forgot Password?</li>
+            </ul>
+        </form>
+        <!-- Forgot Password -->
+        <form name="ForgotForm" class="lc-block lc-form" id="l-forget-password" data-ng-class="{ 'toggled': forgotTab }" data-ng-if="forgotTab">
+            <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu risus. Curabitur commodo lorem fringilla enim feugiat commodo sed ac lacus.</p>
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+                <div class="fg-line">
+                    <input type="text" name="emailForgot" class="form-control" placeholder="Email Address" data-ng-model="forgotForm.email" enter-key="forgotForm.submit(ForgotForm)" validator="required,email" valid-method="watch" message-id="emailForgotMessage">
+                    <span id="emailForgotMessage"></span>
+                </div>
+            </div>
+            <a href="" class="btn btn-login btn-warning btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
+            <ul class="login-navigation">
+                <li data-block="#l-login" class="bgm-green" data-ng-click="gotoTab('login')">Login</li>
+                <li data-block="#l-register" class="bgm-red" data-ng-click="gotoTab('register')">Register</li>
+            </ul>
+        </form>
+        <!-- Older IE warning message -->
+        <!--[if lt IE 9]>
+            <div class="ie-warning">
+                <h1 class="c-white">Warning!!</h1>
+                <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+                <div class="iew-container">
+                    <ul class="iew-download">
+                        <li>
+                            <a href="http://www.google.com/chrome/">
+                                <img src="img/browsers/chrome.png" alt="">
+                                <div>Chrome</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.mozilla.org/en-US/firefox/new/">
+                                <img src="img/browsers/firefox.png" alt="">
+                                <div>Firefox</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.opera.com">
+                                <img src="img/browsers/opera.png" alt="">
+                                <div>Opera</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.apple.com/safari/">
+                                <img src="img/browsers/safari.png" alt="">
+                                <div>Safari</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                                <img src="img/browsers/ie.png" alt="">
+                                <div>IE (New)</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <p>Sorry for the inconvenience!</p>
+            </div>
+        <![endif]-->
+    </div>
+</script>
