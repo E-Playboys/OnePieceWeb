@@ -1,0 +1,9 @@
+﻿<header data-ng-attr-hide-header="{{onepiecectrl.hideHeaderAttr || undefined}}" data-ng-attr-hide-offset="{{onepiecectrl.hideOffsetAttr || undefined}}" id="header" data-ng-include src="'app/views/component/header.html'" data-ng-controller="HeaderCtrl as hctrl" data-ng-init="hctrl.init()"></header>
+
+<section id="main">
+  <aside id="sidebar" data-ng-include src="'app/views/component/sidebar-left.html'" data-ng-class="{ 'toggled': onepiecectrl.sidebarToggle.left === true }"></aside>
+  <div class="sidebar-overlay hidden-lg" data-ng-if="onepiecectrl.sidebarToggle.left" data-ng-click="onepiecectrl.sidebarToggle.left = false"></div>
+  <section id="content" class="page-view" data-ui-view></section>
+</section>
+
+<footer id="footer" data-ng-include src="'app/views/component/footer.html'"></footer>
