@@ -40,4 +40,9 @@
             }
             return url.replace('upload', 'upload/' + resizeInfo.join(','));
         };
+    })
+    .filter('log', function () {
+        return function (data) {
+            console.log(data);
+        };
     });

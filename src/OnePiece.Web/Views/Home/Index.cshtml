@@ -109,10 +109,26 @@
 
   <environment names="Development">
     <script src='~/app/app.js' defer></script>
-    <script src='~/app/config.js' defer></script>
+
+    <!--Services-->
+
+    <!--Factories-->
+    <script src='~/app/factories/auth-interceptor-service.js' defer></script>
+    <script src='~/app/factories/auth-service.js' defer></script>
+    <script src='~/app/factories/post.js' defer></script>
     <script src='~/app/factories.js' defer></script>
+
+    <!--Controllers-->
+    <script src='~/app/controllers/main.js' defer></script>
+    <script src='~/app/controllers/component/header.js' defer></script>
+    <script src='~/app/controllers.js' defer></script>
+
+    <script src='~/app/config.js' defer></script>
     <script src='~/app/filters.js' defer></script>
-    <script src='~/app/pages/account/controllers/login.js' defer></script>
+    <script src='~/app/services.js' defer></script>
+    <script src='~/app/templates.js' defer></script>
+
+    @*<script src='~/app/pages/account/controllers/login.js' defer></script>
     <script src='~/app/pages/account/controllers/profile.js' defer></script>
     <script src='~/app/pages/account/controllers/profile/posts.js' defer></script>
     <script src='~/app/pages/common/controllers/main.js' defer></script>
@@ -122,9 +138,8 @@
     <script src='~/app/pages/management/posts/controllers/posts.js' defer></script>
     <script src='~/app/pages/team/controllers/team.js' defer></script>
     <script src='~/app/pages/wall/controllers/gag.js' defer></script>
-    <script src='~/app/pages/wall/controllers/wall.js' defer></script>
-    <script src='~/app/services.js' defer></script>
-    <script src='~/app/templates.js' defer></script>
+    <script src='~/app/pages/wall/controllers/wall.js' defer></script>*@
+
     <script src='~/app/modules/template.js' defer></script>
     <script src='~/app/modules/ui.js' defer></script>
     <script src='~/app/modules/charts/flot.js' defer></script>
@@ -162,15 +177,15 @@
   </script>
 
   <script>
-    (function (i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date(); a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    //(function (i, s, o, g, r, a, m) {
+    //  i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+    //    (i[r].q = i[r].q || []).push(arguments)
+    //  }, i[r].l = 1 * new Date(); a = s.createElement(o),
+    //  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    //})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-70349434-1', 'auto');
-    ga('send', 'pageview');
+    //ga('create', 'UA-70349434-1', 'auto');
+    //ga('send', 'pageview');
 
   </script>
 
