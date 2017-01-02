@@ -12,7 +12,7 @@ namespace OnePiece.Web.Entities
         public string Description { get; set; }
         public DateTime? PublishedDate { get; set; }
 
-        public List<Anime> Animes { get; set; }
+        public List<AnimeVideo> AnimeVideos { get; set; }
         public int AnimeSeasonId { get; set; }
         public AnimeSeason AnimeSeason { get; set; }
     }
