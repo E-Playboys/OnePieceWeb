@@ -118,16 +118,14 @@ namespace OnePiece.Web.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AlternativeLink = table.Column<string>(nullable: true),
                     AspectRatio = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Height = table.Column<int>(nullable: false),
-                    Link = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    Poster = table.Column<string>(nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: true),
-                    VideoQuality = table.Column<int>(nullable: false),
                     Width = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -274,9 +272,9 @@ namespace OnePiece.Web.Data.Migrations
                     CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Height = table.Column<int>(nullable: false),
-                    Link = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Number = table.Column<int>(nullable: false),
+                    Poster = table.Column<string>(nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: true),
                     VideoQuality = table.Column<int>(nullable: false),
                     Width = table.Column<int>(nullable: false)
@@ -331,6 +329,46 @@ namespace OnePiece.Web.Data.Migrations
                         principalTable: "MangaChapters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VideoLinks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AnimeVideoId = table.Column<int>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
+                    IsMainLink = table.Column<string>(nullable: true),
+                    LinkType = table.Column<int>(nullable: false),
+                    Note = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    VideoId = table.Column<int>(nullable: true),
+                    VideoQuality = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VideoLinks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VideoLinks_AnimeVideos_AnimeVideoId",
+                        column: x => x.AnimeVideoId,
+                        principalTable: "AnimeVideos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VideoLinks_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VideoLinks_Videos_VideoId",
+                        column: x => x.VideoId,
+                        principalTable: "Videos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -398,13 +436,25 @@ namespace OnePiece.Web.Data.Migrations
                 name: "IX_Videos_CreatedUserId",
                 table: "Videos",
                 column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoLinks_AnimeVideoId",
+                table: "VideoLinks",
+                column: "AnimeVideoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoLinks_CreatedUserId",
+                table: "VideoLinks",
+                column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoLinks_VideoId",
+                table: "VideoLinks",
+                column: "VideoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AnimeVideos");
-
             migrationBuilder.DropTable(
                 name: "Articles");
 
@@ -418,10 +468,7 @@ namespace OnePiece.Web.Data.Migrations
                 name: "MusicVideos");
 
             migrationBuilder.DropTable(
-                name: "Videos");
-
-            migrationBuilder.DropTable(
-                name: "AnimeEpisodes");
+                name: "VideoLinks");
 
             migrationBuilder.DropTable(
                 name: "ArticleCategories");
@@ -433,10 +480,19 @@ namespace OnePiece.Web.Data.Migrations
                 name: "MangaChapters");
 
             migrationBuilder.DropTable(
-                name: "AnimeSeasons");
+                name: "AnimeVideos");
+
+            migrationBuilder.DropTable(
+                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "MangaSeasons");
+
+            migrationBuilder.DropTable(
+                name: "AnimeEpisodes");
+
+            migrationBuilder.DropTable(
+                name: "AnimeSeasons");
 
             migrationBuilder.DropIndex(
                 name: "RoleNameIndex",

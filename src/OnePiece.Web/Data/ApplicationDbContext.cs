@@ -26,6 +26,7 @@ namespace OnePiece.Web.Data
         public DbSet<MusicVideo> MusicVideos { get; set; }
         public DbSet<NewsFeed> NewsFeeds { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<VideoLink> VideoLinks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

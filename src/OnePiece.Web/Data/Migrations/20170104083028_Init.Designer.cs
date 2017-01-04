@@ -9,7 +9,7 @@ using OnePiece.Web.Entities.Enums;
 namespace OnePiece.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170102080155_Init")]
+    [Migration("20170104083028_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,11 +236,11 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<int>("Height");
 
-                    b.Property<string>("Link");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("Number");
+
+                    b.Property<string>("Poster");
 
                     b.Property<DateTime?>("UpdatedDate");
 
@@ -490,8 +490,6 @@ namespace OnePiece.Web.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AlternativeLink");
-
                     b.Property<string>("AspectRatio");
 
                     b.Property<DateTime>("CreatedDate");
@@ -502,13 +500,11 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<int>("Height");
 
-                    b.Property<string>("Link");
-
                     b.Property<string>("Name");
 
-                    b.Property<DateTime?>("UpdatedDate");
+                    b.Property<string>("Poster");
 
-                    b.Property<int>("VideoQuality");
+                    b.Property<DateTime?>("UpdatedDate");
 
                     b.Property<int>("Width");
 
@@ -517,6 +513,42 @@ namespace OnePiece.Web.Data.Migrations
                     b.HasIndex("CreatedUserId");
 
                     b.ToTable("Videos");
+                });
+
+            modelBuilder.Entity("OnePiece.Web.Entities.VideoLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AnimeVideoId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
+                    b.Property<string>("IsMainLink");
+
+                    b.Property<int>("LinkType");
+
+                    b.Property<string>("Note");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.Property<string>("Url");
+
+                    b.Property<int?>("VideoId");
+
+                    b.Property<int>("VideoQuality");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeVideoId");
+
+                    b.HasIndex("CreatedUserId");
+
+                    b.HasIndex("VideoId");
+
+                    b.ToTable("VideoLinks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -630,6 +662,21 @@ namespace OnePiece.Web.Data.Migrations
                     b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
                         .WithMany()
                         .HasForeignKey("CreatedUserId");
+                });
+
+            modelBuilder.Entity("OnePiece.Web.Entities.VideoLink", b =>
+                {
+                    b.HasOne("OnePiece.Web.Entities.AnimeVideo")
+                        .WithMany("VideoLinks")
+                        .HasForeignKey("AnimeVideoId");
+
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+
+                    b.HasOne("OnePiece.Web.Entities.Video")
+                        .WithMany("VideoLinks")
+                        .HasForeignKey("VideoId");
                 });
         }
     }
