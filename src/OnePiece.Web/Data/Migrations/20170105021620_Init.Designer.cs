@@ -9,7 +9,7 @@ using OnePiece.Web.Entities.Enums;
 namespace OnePiece.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170104083028_Init")]
+    [Migration("20170105021620_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -526,11 +526,13 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("CreatedUserId");
 
-                    b.Property<string>("IsMainLink");
+                    b.Property<bool>("IsMainLink");
 
                     b.Property<int>("LinkType");
 
                     b.Property<string>("Note");
+
+                    b.Property<string>("Source");
 
                     b.Property<DateTime?>("UpdatedDate");
 

@@ -525,11 +525,13 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("CreatedUserId");
 
-                    b.Property<string>("IsMainLink");
+                    b.Property<bool>("IsMainLink");
 
                     b.Property<int>("LinkType");
 
                     b.Property<string>("Note");
+
+                    b.Property<string>("Source");
 
                     b.Property<DateTime?>("UpdatedDate");
 
