@@ -18,19 +18,27 @@ namespace OnePiece.Web.Data.Migrations
                 table: "AspNetRoles");
 
             migrationBuilder.CreateTable(
-                name: "AnimeSeasons",
+                name: "AnimeCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Avatar = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Number = table.Column<int>(nullable: false)
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnimeSeasons", x => x.Id);
+                    table.PrimaryKey("PK_AnimeCategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnimeCategories_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,13 +47,22 @@ namespace OnePiece.Web.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Priority = table.Column<int>(nullable: false)
+                    Priority = table.Column<int>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArticleCategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArticleCategories_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,13 +72,22 @@ namespace OnePiece.Web.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Avatar = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Number = table.Column<int>(nullable: false)
+                    Number = table.Column<int>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MangaSeasons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MangaSeasons_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,15 +127,24 @@ namespace OnePiece.Web.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Avatar = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     IsActived = table.Column<bool>(nullable: false),
                     LinkToId = table.Column<int>(nullable: true),
                     LinkToTarget = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NewsFeeds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NewsFeeds_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,27 +175,35 @@ namespace OnePiece.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AnimeEpisodes",
+                name: "AnimeSeasons",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AnimeSeasonId = table.Column<int>(nullable: false),
+                    AnimeCategoryId = table.Column<int>(nullable: true),
                     Avatar = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Number = table.Column<int>(nullable: false),
-                    PublishedDate = table.Column<DateTime>(nullable: true)
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnimeEpisodes", x => x.Id);
+                    table.PrimaryKey("PK_AnimeSeasons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId",
-                        column: x => x.AnimeSeasonId,
-                        principalTable: "AnimeSeasons",
+                        name: "FK_AnimeSeasons_AnimeCategories_AnimeCategoryId",
+                        column: x => x.AnimeCategoryId,
+                        principalTable: "AnimeCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AnimeSeasons_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,15 +248,24 @@ namespace OnePiece.Web.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Avatar = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MangaSeasonId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Number = table.Column<int>(nullable: false),
-                    PublishedDate = table.Column<DateTime>(nullable: true)
+                    PublishedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MangaChapters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MangaChapters_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MangaChapters_MangaSeasons_MangaSeasonId",
                         column: x => x.MangaSeasonId,
@@ -260,36 +312,32 @@ namespace OnePiece.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AnimeVideos",
+                name: "AnimeEpisodes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AlternativeLink = table.Column<string>(nullable: true),
-                    AnimeEpisodeId = table.Column<int>(nullable: false),
-                    AspectRatio = table.Column<string>(nullable: true),
+                    AnimeSeasonId = table.Column<int>(nullable: false),
+                    Avatar = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     CreatedUserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Height = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Number = table.Column<int>(nullable: false),
-                    Poster = table.Column<string>(nullable: true),
-                    UpdatedDate = table.Column<DateTime>(nullable: true),
-                    VideoQuality = table.Column<int>(nullable: false),
-                    Width = table.Column<int>(nullable: false)
+                    PublishedDate = table.Column<DateTime>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnimeVideos", x => x.Id);
+                    table.PrimaryKey("PK_AnimeEpisodes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AnimeVideos_AnimeEpisodes_AnimeEpisodeId",
-                        column: x => x.AnimeEpisodeId,
-                        principalTable: "AnimeEpisodes",
+                        name: "FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId",
+                        column: x => x.AnimeSeasonId,
+                        principalTable: "AnimeSeasons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AnimeVideos_AspNetUsers_CreatedUserId",
+                        name: "FK_AnimeEpisodes_AspNetUsers_CreatedUserId",
                         column: x => x.CreatedUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -329,6 +377,43 @@ namespace OnePiece.Web.Data.Migrations
                         principalTable: "MangaChapters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AnimeVideos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AlternativeLink = table.Column<string>(nullable: true),
+                    AnimeEpisodeId = table.Column<int>(nullable: false),
+                    AspectRatio = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedUserId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Height = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Number = table.Column<int>(nullable: false),
+                    Poster = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
+                    VideoQuality = table.Column<int>(nullable: false),
+                    Width = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimeVideos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnimeVideos_AnimeEpisodes_AnimeEpisodeId",
+                        column: x => x.AnimeEpisodeId,
+                        principalTable: "AnimeEpisodes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnimeVideos_AspNetUsers_CreatedUserId",
+                        column: x => x.CreatedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -379,9 +464,29 @@ namespace OnePiece.Web.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_AnimeCategories_CreatedUserId",
+                table: "AnimeCategories",
+                column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AnimeEpisodes_AnimeSeasonId",
                 table: "AnimeEpisodes",
                 column: "AnimeSeasonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimeEpisodes_CreatedUserId",
+                table: "AnimeEpisodes",
+                column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimeSeasons_AnimeCategoryId",
+                table: "AnimeSeasons",
+                column: "AnimeCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimeSeasons_CreatedUserId",
+                table: "AnimeSeasons",
+                column: "CreatedUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnimeVideos_AnimeEpisodeId",
@@ -404,6 +509,11 @@ namespace OnePiece.Web.Data.Migrations
                 column: "CreatedUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArticleCategories_CreatedUserId",
+                table: "ArticleCategories",
+                column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_CreatedUserId",
                 table: "Images",
                 column: "CreatedUserId");
@@ -412,6 +522,11 @@ namespace OnePiece.Web.Data.Migrations
                 name: "IX_Images_NewsFeedId",
                 table: "Images",
                 column: "NewsFeedId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MangaChapters_CreatedUserId",
+                table: "MangaChapters",
+                column: "CreatedUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MangaChapters_MangaSeasonId",
@@ -429,8 +544,18 @@ namespace OnePiece.Web.Data.Migrations
                 column: "MangaChapterId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MangaSeasons_CreatedUserId",
+                table: "MangaSeasons",
+                column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MusicVideos_CreatedUserId",
                 table: "MusicVideos",
+                column: "CreatedUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NewsFeeds_CreatedUserId",
+                table: "NewsFeeds",
                 column: "CreatedUserId");
 
             migrationBuilder.CreateIndex(
@@ -494,6 +619,9 @@ namespace OnePiece.Web.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AnimeSeasons");
+
+            migrationBuilder.DropTable(
+                name: "AnimeCategories");
 
             migrationBuilder.DropIndex(
                 name: "RoleNameIndex",

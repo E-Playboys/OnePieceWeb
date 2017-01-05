@@ -174,6 +174,30 @@ namespace OnePiece.Web.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("OnePiece.Web.Entities.AnimeCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Avatar");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedUserId");
+
+                    b.ToTable("AnimeCategories");
+                });
+
             modelBuilder.Entity("OnePiece.Web.Entities.AnimeEpisode", b =>
                 {
                     b.Property<int>("Id")
@@ -183,6 +207,10 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("Avatar");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
@@ -191,9 +219,13 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<DateTime?>("PublishedDate");
 
+                    b.Property<DateTime?>("UpdatedDate");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AnimeSeasonId");
+
+                    b.HasIndex("CreatedUserId");
 
                     b.ToTable("AnimeEpisodes");
                 });
@@ -203,7 +235,13 @@ namespace OnePiece.Web.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("AnimeCategoryId");
+
                     b.Property<string>("Avatar");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
 
                     b.Property<string>("Description");
 
@@ -211,7 +249,13 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<int>("Number");
 
+                    b.Property<DateTime?>("UpdatedDate");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AnimeCategoryId");
+
+                    b.HasIndex("CreatedUserId");
 
                     b.ToTable("AnimeSeasons");
                 });
@@ -297,13 +341,21 @@ namespace OnePiece.Web.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Priority");
 
+                    b.Property<DateTime?>("UpdatedDate");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedUserId");
 
                     b.ToTable("ArticleCategories");
                 });
@@ -355,6 +407,10 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("Avatar");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
                     b.Property<string>("Description");
 
                     b.Property<int>("MangaSeasonId");
@@ -365,7 +421,11 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<DateTime?>("PublishedDate");
 
+                    b.Property<DateTime?>("UpdatedDate");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedUserId");
 
                     b.HasIndex("MangaSeasonId");
 
@@ -415,13 +475,21 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("Avatar");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Number");
 
+                    b.Property<DateTime?>("UpdatedDate");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedUserId");
 
                     b.ToTable("MangaSeasons");
                 });
@@ -469,6 +537,10 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("Avatar");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatedUserId");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsActived");
@@ -479,7 +551,11 @@ namespace OnePiece.Web.Data.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<DateTime?>("UpdatedDate");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedUserId");
 
                     b.ToTable("NewsFeeds");
                 });
@@ -589,12 +665,34 @@ namespace OnePiece.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("OnePiece.Web.Entities.AnimeCategory", b =>
+                {
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+                });
+
             modelBuilder.Entity("OnePiece.Web.Entities.AnimeEpisode", b =>
                 {
                     b.HasOne("OnePiece.Web.Entities.AnimeSeason", "AnimeSeason")
                         .WithMany("AnimeEpisodes")
                         .HasForeignKey("AnimeSeasonId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+                });
+
+            modelBuilder.Entity("OnePiece.Web.Entities.AnimeSeason", b =>
+                {
+                    b.HasOne("OnePiece.Web.Entities.AnimeCategory")
+                        .WithMany("AnimeSeasons")
+                        .HasForeignKey("AnimeCategoryId");
+
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
                 });
 
             modelBuilder.Entity("OnePiece.Web.Entities.AnimeVideo", b =>
@@ -620,6 +718,13 @@ namespace OnePiece.Web.Data.Migrations
                         .HasForeignKey("CreatedUserId");
                 });
 
+            modelBuilder.Entity("OnePiece.Web.Entities.ArticleCategory", b =>
+                {
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+                });
+
             modelBuilder.Entity("OnePiece.Web.Entities.Image", b =>
                 {
                     b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
@@ -633,6 +738,10 @@ namespace OnePiece.Web.Data.Migrations
 
             modelBuilder.Entity("OnePiece.Web.Entities.MangaChapter", b =>
                 {
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+
                     b.HasOne("OnePiece.Web.Entities.MangaSeason", "MangaSeason")
                         .WithMany("MangaChapters")
                         .HasForeignKey("MangaSeasonId")
@@ -651,7 +760,21 @@ namespace OnePiece.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("OnePiece.Web.Entities.MangaSeason", b =>
+                {
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+                });
+
             modelBuilder.Entity("OnePiece.Web.Entities.MusicVideo", b =>
+                {
+                    b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId");
+                });
+
+            modelBuilder.Entity("OnePiece.Web.Entities.NewsFeed", b =>
                 {
                     b.HasOne("OnePiece.Web.DataAccess.Entities.User", "CreatedUser")
                         .WithMany()

@@ -14,6 +14,7 @@ namespace OnePiece.Web.Data
         {
         }
 
+        public DbSet<AnimeCategory> AnimeCategories { get; set; }
         public DbSet<AnimeVideo> AnimeVideos { get; set; }
         public DbSet<AnimeEpisode> AnimeEpisodes { get; set; }
         public DbSet<AnimeSeason> AnimeSeasons { get; set; }
