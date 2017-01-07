@@ -1,0 +1,1424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OnePieceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnimeEpisodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnimeSeasonId" Type="int" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="PublishedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Animes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternativeLink" Type="nvarchar(max)" />
+          <Property Name="AnimeEpisodeId" Type="int" Nullable="false" />
+          <Property Name="AspectRatio" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedUserId" Type="nvarchar" MaxLength="450" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="VideoQuality" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AnimeSeasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticleCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleCategoryId" Type="int" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedUserId" Type="nvarchar" MaxLength="450" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActived" Type="bit" Nullable="false" />
+          <Property Name="PublishedDate" Type="datetime2" Precision="7" />
+          <Property Name="Slug" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="AspNetRoleClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="ProviderDisplayName" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="450" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEnd" Type="datetimeoffset" Precision="7" />
+          <Property Name="NormalizedEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedUserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="AspNetUserTokens">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternativeGifLink" Type="nvarchar(max)" />
+          <Property Name="AlternativeLink" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedUserId" Type="nvarchar" MaxLength="450" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="GifLink" Type="nvarchar(max)" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="ImageType" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="NewsFeedId" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="Width" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MangaChapters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="MangaSeasonId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="PublishedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Mangas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternativeGifLink" Type="nvarchar(max)" />
+          <Property Name="AlternativeLink" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedUserId" Type="nvarchar" MaxLength="450" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="GifLink" Type="nvarchar(max)" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="MangaChapterId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="Width" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MangaSeasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MusicVideos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternativeLink" Type="nvarchar(max)" />
+          <Property Name="AspectRatio" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedUserId" Type="nvarchar" MaxLength="450" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="PublishedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="VideoQuality" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsFeeds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActived" Type="bit" Nullable="false" />
+          <Property Name="LinkToId" Type="int" />
+          <Property Name="LinkToTarget" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternativeLink" Type="nvarchar(max)" />
+          <Property Name="AspectRatio" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedUserId" Type="nvarchar" MaxLength="450" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="VideoQuality" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId">
+          <End Role="AnimeSeasons" Type="Self.AnimeSeasons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnimeEpisodes" Type="Self.AnimeEpisodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnimeSeasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnimeEpisodes">
+              <PropertyRef Name="AnimeSeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animes_AnimeEpisodes_AnimeEpisodeId">
+          <End Role="AnimeEpisodes" Type="Self.AnimeEpisodes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Animes" Type="Self.Animes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnimeEpisodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animes">
+              <PropertyRef Name="AnimeEpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animes_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Animes" Type="Self.Animes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animes">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_ArticleCategories_ArticleCategoryId">
+          <End Role="ArticleCategories" Type="Self.ArticleCategories" Multiplicity="0..1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="ArticleCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Articles" Type="Self.Articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetRoleClaims" Type="Self.AspNetRoleClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleClaims">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserLogins_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserRoles_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_NewsFeeds_NewsFeedId">
+          <End Role="NewsFeeds" Type="Self.NewsFeeds" Multiplicity="0..1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsFeeds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="NewsFeedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MangaChapters_MangaSeasons_MangaSeasonId">
+          <End Role="MangaSeasons" Type="Self.MangaSeasons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MangaChapters" Type="Self.MangaChapters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MangaSeasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MangaChapters">
+              <PropertyRef Name="MangaSeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mangas_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Mangas" Type="Self.Mangas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mangas">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mangas_MangaChapters_MangaChapterId">
+          <End Role="MangaChapters" Type="Self.MangaChapters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mangas" Type="Self.Mangas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MangaChapters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mangas">
+              <PropertyRef Name="MangaChapterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusicVideos_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="MusicVideos" Type="Self.MusicVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicVideos">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Videos_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Videos" Type="Self.Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnePieceModelStoreContainer">
+          <EntitySet Name="AnimeEpisodes" EntityType="Self.AnimeEpisodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Animes" EntityType="Self.Animes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnimeSeasons" EntityType="Self.AnimeSeasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleCategories" EntityType="Self.ArticleCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="Self.AspNetRoleClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserTokens" EntityType="Self.AspNetUserTokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MangaChapters" EntityType="Self.MangaChapters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mangas" EntityType="Self.Mangas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MangaSeasons" EntityType="Self.MangaSeasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusicVideos" EntityType="Self.MusicVideos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsFeeds" EntityType="Self.NewsFeeds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId" Association="Self.FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId">
+            <End Role="AnimeSeasons" EntitySet="AnimeSeasons" />
+            <End Role="AnimeEpisodes" EntitySet="AnimeEpisodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animes_AnimeEpisodes_AnimeEpisodeId" Association="Self.FK_Animes_AnimeEpisodes_AnimeEpisodeId">
+            <End Role="AnimeEpisodes" EntitySet="AnimeEpisodes" />
+            <End Role="Animes" EntitySet="Animes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animes_AspNetUsers_CreatedUserId" Association="Self.FK_Animes_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Animes" EntitySet="Animes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_ArticleCategories_ArticleCategoryId" Association="Self.FK_Articles_ArticleCategories_ArticleCategoryId">
+            <End Role="ArticleCategories" EntitySet="ArticleCategories" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_AspNetUsers_CreatedUserId" Association="Self.FK_Articles_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="Self.FK_AspNetUserClaims_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserLogins_AspNetUsers_UserId" Association="Self.FK_AspNetUserLogins_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles_RoleId" Association="Self.FK_AspNetUserRoles_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers_UserId" Association="Self.FK_AspNetUserRoles_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_AspNetUsers_CreatedUserId" Association="Self.FK_Images_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_NewsFeeds_NewsFeedId" Association="Self.FK_Images_NewsFeeds_NewsFeedId">
+            <End Role="NewsFeeds" EntitySet="NewsFeeds" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MangaChapters_MangaSeasons_MangaSeasonId" Association="Self.FK_MangaChapters_MangaSeasons_MangaSeasonId">
+            <End Role="MangaSeasons" EntitySet="MangaSeasons" />
+            <End Role="MangaChapters" EntitySet="MangaChapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mangas_AspNetUsers_CreatedUserId" Association="Self.FK_Mangas_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Mangas" EntitySet="Mangas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mangas_MangaChapters_MangaChapterId" Association="Self.FK_Mangas_MangaChapters_MangaChapterId">
+            <End Role="MangaChapters" EntitySet="MangaChapters" />
+            <End Role="Mangas" EntitySet="Mangas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusicVideos_AspNetUsers_CreatedUserId" Association="Self.FK_MusicVideos_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MusicVideos" EntitySet="MusicVideos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Videos_AspNetUsers_CreatedUserId" Association="Self.FK_Videos_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnePieceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnimeEpisode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnimeSeasonId" Type="Int32" Nullable="false" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="AnimeSeason" Relationship="Self.FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId" FromRole="AnimeEpisodes" ToRole="AnimeSeasons" />
+          <NavigationProperty Name="Animes" Relationship="Self.FK_Animes_AnimeEpisodes_AnimeEpisodeId" FromRole="AnimeEpisodes" ToRole="Animes" />
+        </EntityType>
+        <EntityType Name="Anime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternativeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AnimeEpisodeId" Type="Int32" Nullable="false" />
+          <Property Name="AspectRatio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedUserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="VideoQuality" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnimeEpisode" Relationship="Self.FK_Animes_AnimeEpisodes_AnimeEpisodeId" FromRole="Animes" ToRole="AnimeEpisodes" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Animes_AspNetUsers_CreatedUserId" FromRole="Animes" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AnimeSeason">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AnimeEpisodes" Relationship="Self.FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId" FromRole="AnimeSeasons" ToRole="AnimeEpisodes" />
+        </EntityType>
+        <EntityType Name="ArticleCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Articles_ArticleCategories_ArticleCategoryId" FromRole="ArticleCategories" ToRole="Articles" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleCategoryId" Type="Int32" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedUserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActived" Type="Boolean" Nullable="false" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="7" />
+          <Property Name="Slug" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="ArticleCategory" Relationship="Self.FK_Articles_ArticleCategories_ArticleCategoryId" FromRole="Articles" ToRole="ArticleCategories" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Articles_AspNetUsers_CreatedUserId" FromRole="Articles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetRoleClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRole" Relationship="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoleClaims" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoleClaims" Relationship="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetRoleClaims" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderDisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEnd" Type="DateTimeOffset" Precision="7" />
+          <Property Name="NormalizedEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Animes" Relationship="Self.FK_Animes_AspNetUsers_CreatedUserId" FromRole="AspNetUsers" ToRole="Animes" />
+          <NavigationProperty Name="Articles" Relationship="Self.FK_Articles_AspNetUsers_CreatedUserId" FromRole="AspNetUsers" ToRole="Articles" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Images_AspNetUsers_CreatedUserId" FromRole="AspNetUsers" ToRole="Images" />
+          <NavigationProperty Name="Mangas" Relationship="Self.FK_Mangas_AspNetUsers_CreatedUserId" FromRole="AspNetUsers" ToRole="Mangas" />
+          <NavigationProperty Name="MusicVideos" Relationship="Self.FK_MusicVideos_AspNetUsers_CreatedUserId" FromRole="AspNetUsers" ToRole="MusicVideos" />
+          <NavigationProperty Name="Videos" Relationship="Self.FK_Videos_AspNetUsers_CreatedUserId" FromRole="AspNetUsers" ToRole="Videos" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUserToken">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoginProvider" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternativeGifLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlternativeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedUserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GifLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="ImageType" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewsFeedId" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Images_AspNetUsers_CreatedUserId" FromRole="Images" ToRole="AspNetUsers" />
+          <NavigationProperty Name="NewsFeed" Relationship="Self.FK_Images_NewsFeeds_NewsFeedId" FromRole="Images" ToRole="NewsFeeds" />
+        </EntityType>
+        <EntityType Name="MangaChapter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MangaSeasonId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="MangaSeason" Relationship="Self.FK_MangaChapters_MangaSeasons_MangaSeasonId" FromRole="MangaChapters" ToRole="MangaSeasons" />
+          <NavigationProperty Name="Mangas" Relationship="Self.FK_Mangas_MangaChapters_MangaChapterId" FromRole="MangaChapters" ToRole="Mangas" />
+        </EntityType>
+        <EntityType Name="Manga">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternativeGifLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlternativeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedUserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GifLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MangaChapterId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Mangas_AspNetUsers_CreatedUserId" FromRole="Mangas" ToRole="AspNetUsers" />
+          <NavigationProperty Name="MangaChapter" Relationship="Self.FK_Mangas_MangaChapters_MangaChapterId" FromRole="Mangas" ToRole="MangaChapters" />
+        </EntityType>
+        <EntityType Name="MangaSeason">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MangaChapters" Relationship="Self.FK_MangaChapters_MangaSeasons_MangaSeasonId" FromRole="MangaSeasons" ToRole="MangaChapters" />
+        </EntityType>
+        <EntityType Name="MusicVideo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternativeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AspectRatio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedUserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="VideoQuality" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_MusicVideos_AspNetUsers_CreatedUserId" FromRole="MusicVideos" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="NewsFeed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActived" Type="Boolean" Nullable="false" />
+          <Property Name="LinkToId" Type="Int32" />
+          <Property Name="LinkToTarget" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Images_NewsFeeds_NewsFeedId" FromRole="NewsFeeds" ToRole="Images" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternativeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AspectRatio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedUserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="VideoQuality" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Videos_AspNetUsers_CreatedUserId" FromRole="Videos" ToRole="AspNetUsers" />
+        </EntityType>
+        <Association Name="FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId">
+          <End Role="AnimeSeasons" Type="Self.AnimeSeason" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AnimeEpisodes" Type="Self.AnimeEpisode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnimeSeasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnimeEpisodes">
+              <PropertyRef Name="AnimeSeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animes_AnimeEpisodes_AnimeEpisodeId">
+          <End Role="AnimeEpisodes" Type="Self.AnimeEpisode" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Animes" Type="Self.Anime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnimeEpisodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animes">
+              <PropertyRef Name="AnimeEpisodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animes_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Animes" Type="Self.Anime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animes">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_ArticleCategories_ArticleCategoryId">
+          <End Role="ArticleCategories" Type="Self.ArticleCategory" Multiplicity="0..1" />
+          <End Role="Articles" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="ArticleCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articles_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Articles" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetRoleClaims" Type="Self.AspNetRoleClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetRoleClaims">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUserLogins_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Images" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mangas_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Mangas" Type="Self.Manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mangas">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusicVideos_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="MusicVideos" Type="Self.MusicVideo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MusicVideos">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Videos_AspNetUsers_CreatedUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Videos" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="CreatedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_NewsFeeds_NewsFeedId">
+          <End Role="NewsFeeds" Type="Self.NewsFeed" Multiplicity="0..1" />
+          <End Role="Images" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsFeeds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="NewsFeedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MangaChapters_MangaSeasons_MangaSeasonId">
+          <End Role="MangaSeasons" Type="Self.MangaSeason" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MangaChapters" Type="Self.MangaChapter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MangaSeasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MangaChapters">
+              <PropertyRef Name="MangaSeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mangas_MangaChapters_MangaChapterId">
+          <End Role="MangaChapters" Type="Self.MangaChapter" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mangas" Type="Self.Manga" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MangaChapters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mangas">
+              <PropertyRef Name="MangaChapterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="OnePieceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnimeEpisodes" EntityType="Self.AnimeEpisode" />
+          <EntitySet Name="Animes" EntityType="Self.Anime" />
+          <EntitySet Name="AnimeSeasons" EntityType="Self.AnimeSeason" />
+          <EntitySet Name="ArticleCategories" EntityType="Self.ArticleCategory" />
+          <EntitySet Name="Articles" EntityType="Self.Article" />
+          <EntitySet Name="AspNetRoleClaims" EntityType="Self.AspNetRoleClaim" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="AspNetUserTokens" EntityType="Self.AspNetUserToken" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="MangaChapters" EntityType="Self.MangaChapter" />
+          <EntitySet Name="Mangas" EntityType="Self.Manga" />
+          <EntitySet Name="MangaSeasons" EntityType="Self.MangaSeason" />
+          <EntitySet Name="MusicVideos" EntityType="Self.MusicVideo" />
+          <EntitySet Name="NewsFeeds" EntityType="Self.NewsFeed" />
+          <EntitySet Name="Videos" EntityType="Self.Video" />
+          <AssociationSet Name="FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId" Association="Self.FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId">
+            <End Role="AnimeSeasons" EntitySet="AnimeSeasons" />
+            <End Role="AnimeEpisodes" EntitySet="AnimeEpisodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animes_AnimeEpisodes_AnimeEpisodeId" Association="Self.FK_Animes_AnimeEpisodes_AnimeEpisodeId">
+            <End Role="AnimeEpisodes" EntitySet="AnimeEpisodes" />
+            <End Role="Animes" EntitySet="Animes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animes_AspNetUsers_CreatedUserId" Association="Self.FK_Animes_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Animes" EntitySet="Animes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_ArticleCategories_ArticleCategoryId" Association="Self.FK_Articles_ArticleCategories_ArticleCategoryId">
+            <End Role="ArticleCategories" EntitySet="ArticleCategories" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articles_AspNetUsers_CreatedUserId" Association="Self.FK_Articles_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="Self.FK_AspNetUserClaims_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUserLogins_AspNetUsers_UserId" Association="Self.FK_AspNetUserLogins_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_AspNetUsers_CreatedUserId" Association="Self.FK_Images_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mangas_AspNetUsers_CreatedUserId" Association="Self.FK_Mangas_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Mangas" EntitySet="Mangas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusicVideos_AspNetUsers_CreatedUserId" Association="Self.FK_MusicVideos_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MusicVideos" EntitySet="MusicVideos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Videos_AspNetUsers_CreatedUserId" Association="Self.FK_Videos_AspNetUsers_CreatedUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_NewsFeeds_NewsFeedId" Association="Self.FK_Images_NewsFeeds_NewsFeedId">
+            <End Role="NewsFeeds" EntitySet="NewsFeeds" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MangaChapters_MangaSeasons_MangaSeasonId" Association="Self.FK_MangaChapters_MangaSeasons_MangaSeasonId">
+            <End Role="MangaSeasons" EntitySet="MangaSeasons" />
+            <End Role="MangaChapters" EntitySet="MangaChapters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mangas_MangaChapters_MangaChapterId" Association="Self.FK_Mangas_MangaChapters_MangaChapterId">
+            <End Role="MangaChapters" EntitySet="MangaChapters" />
+            <End Role="Mangas" EntitySet="Mangas" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnePieceModelStoreContainer" CdmEntityContainer="OnePieceEntities">
+          <EntitySetMapping Name="AnimeEpisodes">
+            <EntityTypeMapping TypeName="OnePieceModel.AnimeEpisode">
+              <MappingFragment StoreEntitySet="AnimeEpisodes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AnimeSeasonId" ColumnName="AnimeSeasonId" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Animes">
+            <EntityTypeMapping TypeName="OnePieceModel.Anime">
+              <MappingFragment StoreEntitySet="Animes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlternativeLink" ColumnName="AlternativeLink" />
+                <ScalarProperty Name="AnimeEpisodeId" ColumnName="AnimeEpisodeId" />
+                <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="VideoQuality" ColumnName="VideoQuality" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnimeSeasons">
+            <EntityTypeMapping TypeName="OnePieceModel.AnimeSeason">
+              <MappingFragment StoreEntitySet="AnimeSeasons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleCategories">
+            <EntityTypeMapping TypeName="OnePieceModel.ArticleCategory">
+              <MappingFragment StoreEntitySet="ArticleCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="OnePieceModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArticleCategoryId" ColumnName="ArticleCategoryId" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActived" ColumnName="IsActived" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoleClaims">
+            <EntityTypeMapping TypeName="OnePieceModel.AspNetRoleClaim">
+              <MappingFragment StoreEntitySet="AspNetRoleClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="OnePieceModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NormalizedName" ColumnName="NormalizedName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="OnePieceModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="OnePieceModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="ProviderDisplayName" ColumnName="ProviderDisplayName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="OnePieceModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="ConcurrencyStamp" ColumnName="ConcurrencyStamp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEnd" ColumnName="LockoutEnd" />
+                <ScalarProperty Name="NormalizedEmail" ColumnName="NormalizedEmail" />
+                <ScalarProperty Name="NormalizedUserName" ColumnName="NormalizedUserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserTokens">
+            <EntityTypeMapping TypeName="OnePieceModel.AspNetUserToken">
+              <MappingFragment StoreEntitySet="AspNetUserTokens">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="OnePieceModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlternativeGifLink" ColumnName="AlternativeGifLink" />
+                <ScalarProperty Name="AlternativeLink" ColumnName="AlternativeLink" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GifLink" ColumnName="GifLink" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NewsFeedId" ColumnName="NewsFeedId" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MangaChapters">
+            <EntityTypeMapping TypeName="OnePieceModel.MangaChapter">
+              <MappingFragment StoreEntitySet="MangaChapters">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MangaSeasonId" ColumnName="MangaSeasonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mangas">
+            <EntityTypeMapping TypeName="OnePieceModel.Manga">
+              <MappingFragment StoreEntitySet="Mangas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlternativeGifLink" ColumnName="AlternativeGifLink" />
+                <ScalarProperty Name="AlternativeLink" ColumnName="AlternativeLink" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GifLink" ColumnName="GifLink" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="MangaChapterId" ColumnName="MangaChapterId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MangaSeasons">
+            <EntityTypeMapping TypeName="OnePieceModel.MangaSeason">
+              <MappingFragment StoreEntitySet="MangaSeasons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusicVideos">
+            <EntityTypeMapping TypeName="OnePieceModel.MusicVideo">
+              <MappingFragment StoreEntitySet="MusicVideos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlternativeLink" ColumnName="AlternativeLink" />
+                <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="VideoQuality" ColumnName="VideoQuality" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsFeeds">
+            <EntityTypeMapping TypeName="OnePieceModel.NewsFeed">
+              <MappingFragment StoreEntitySet="NewsFeeds">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActived" ColumnName="IsActived" />
+                <ScalarProperty Name="LinkToId" ColumnName="LinkToId" />
+                <ScalarProperty Name="LinkToTarget" ColumnName="LinkToTarget" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="OnePieceModel.Video">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AlternativeLink" ColumnName="AlternativeLink" />
+                <ScalarProperty Name="AspectRatio" ColumnName="AspectRatio" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUserId" ColumnName="CreatedUserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="VideoQuality" ColumnName="VideoQuality" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="OnePieceModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
