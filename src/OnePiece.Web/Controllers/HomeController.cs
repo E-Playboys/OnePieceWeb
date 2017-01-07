@@ -17,5 +17,10 @@ namespace OnePiece.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult TestApi()
+        {
+            return new JsonResult(new { Test = "abc" });
+        }
     }
 }
