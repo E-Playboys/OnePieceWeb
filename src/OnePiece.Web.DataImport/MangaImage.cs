@@ -12,15 +12,13 @@ namespace OnePiece.Web.DataImport
     using System;
     using System.Collections.Generic;
     
-    public partial class Manga
+    public partial class MangaImage
     {
         public int Id { get; set; }
-        public string AlternativeGifLink { get; set; }
         public string AlternativeLink { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedUserId { get; set; }
         public string Description { get; set; }
-        public string GifLink { get; set; }
         public int Height { get; set; }
         public string Link { get; set; }
         public int MangaChapterId { get; set; }

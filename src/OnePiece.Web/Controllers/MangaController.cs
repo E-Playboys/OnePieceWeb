@@ -16,22 +16,17 @@ namespace OnePiece.Web.Controllers
     [Route("api/[controller]")]
     public class MangaController : Controller
     {
-        private readonly IMangaRepository _mangaRepo;
         private readonly ILogger _logger;
 
-        public MangaController(IMangaRepository mangaRepo, ILoggerFactory loggerFactory)
+        public MangaController(ILoggerFactory loggerFactory)
         {
-            _mangaRepo = mangaRepo;
             _logger = loggerFactory.CreateLogger<MangaController>();
         }
 
         [HttpGet]
-        public async Task<string> Get()
+        public string Get()
         {
-            List<Manga> allEp = await _mangaRepo.GetAllAsync();
-            string result = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(allEp));
-
-            return result;
+            return "";
         }
 
         // GET api/values/5

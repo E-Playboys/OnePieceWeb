@@ -95,7 +95,7 @@ namespace OnePiece.Web.DataImport
 
                         ImageUploadResult imgResult = cloudinary.Upload(mangaImgUploadParams);
 
-                        Manga newEpisode = new Manga()
+                        MangaImage newEpisode = new MangaImage()
                         {
                             Number = pageNum,
                             Link = imgResult.Uri.ToString(),
@@ -107,7 +107,7 @@ namespace OnePiece.Web.DataImport
                             Description = episodeNames[i]
                         };
 
-                        newChapter.Mangas.Add(newEpisode);
+                        newChapter.MangaImages.Add(newEpisode);
                         Console.WriteLine("Episode {0} {1} - Page {2} Imported !", i + 1, episodeNames[i], pageNum);
                         pageNum++;
                     }

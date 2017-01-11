@@ -12,27 +12,24 @@ namespace OnePiece.Web.DataImport
     using System;
     using System.Collections.Generic;
     
-    public partial class NewsFeed
+    public partial class AnimeCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NewsFeed()
+        public AnimeCategory()
         {
-            this.Images = new HashSet<Image>();
+            this.AnimeSeasons = new HashSet<AnimeSeason>();
         }
     
         public int Id { get; set; }
         public string Avatar { get; set; }
-        public string Description { get; set; }
-        public bool IsActived { get; set; }
-        public Nullable<int> LinkToId { get; set; }
-        public int LinkToTarget { get; set; }
-        public string Title { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedUserId { get; set; }
+        public string Description { get; set; }
+        public string Name { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnimeSeason> AnimeSeasons { get; set; }
     }
 }

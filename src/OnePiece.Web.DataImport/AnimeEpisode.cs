@@ -17,7 +17,7 @@ namespace OnePiece.Web.DataImport
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AnimeEpisode()
         {
-            this.Animes = new HashSet<Anime>();
+            this.AnimeVideos = new HashSet<AnimeVideo>();
         }
     
         public int Id { get; set; }
@@ -27,9 +27,13 @@ namespace OnePiece.Web.DataImport
         public string Name { get; set; }
         public int Number { get; set; }
         public Nullable<System.DateTime> PublishedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string CreatedUserId { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         public virtual AnimeSeason AnimeSeason { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Anime> Animes { get; set; }
+        public virtual ICollection<AnimeVideo> AnimeVideos { get; set; }
     }
 }

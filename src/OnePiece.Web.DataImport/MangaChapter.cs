@@ -17,7 +17,7 @@ namespace OnePiece.Web.DataImport
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MangaChapter()
         {
-            this.Mangas = new HashSet<Manga>();
+            this.MangaImages = new HashSet<MangaImage>();
         }
     
         public int Id { get; set; }
@@ -27,9 +27,13 @@ namespace OnePiece.Web.DataImport
         public string Name { get; set; }
         public int Number { get; set; }
         public Nullable<System.DateTime> PublishedDate { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string CreatedUserId { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         public virtual MangaSeason MangaSeason { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Manga> Mangas { get; set; }
+        public virtual ICollection<MangaImage> MangaImages { get; set; }
     }
 }
