@@ -2,15 +2,13 @@
 
 namespace OnePiece.Web.Entities
 {
-    public class Manga : Tracking
+    public class MangaImage : Tracking
     {
         public string Name { get; set; }
         public int Number { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
         public string AlternativeLink { get; set; }
-        public string GifLink { get; set; }
-        public string AlternativeGifLink { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
 

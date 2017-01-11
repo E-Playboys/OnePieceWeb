@@ -3,7 +3,7 @@ using OnePiece.Web.DataAccess.Entities;
 
 namespace OnePiece.Web.Entities
 {
-    public class ArticleCategory : EntityBase
+    public class ArticleCategory : Tracking
     {
         public string Name { get; set; }
         public string Description { get; set; }
