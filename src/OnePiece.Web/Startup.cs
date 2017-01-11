@@ -64,6 +64,7 @@ namespace OnePiece.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IMangaRepository, MangaRepository>();
         }
 
         private ConnectionString BuildConnectionString(IServiceCollection services)
