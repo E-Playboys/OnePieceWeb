@@ -3,7 +3,7 @@ using OnePiece.Web.DataAccess.Entities;
 
 namespace OnePiece.Web.Entities
 {
-    public class MangaSeason : EntityBase
+    public class MangaSeason : Tracking
     {
         public string Name { get; set; }
         public string Avatar { get; set; }

@@ -4,7 +4,7 @@ using OnePiece.Web.DataAccess.Entities;
 
 namespace OnePiece.Web.Entities
 {
-    public class AnimeEpisode : EntityBase
+    public class AnimeEpisode : Tracking
     {
         public string Name { get; set; }
         public string Avatar { get; set; }
@@ -12,7 +12,7 @@ namespace OnePiece.Web.Entities
         public string Description { get; set; }
         public DateTime? PublishedDate { get; set; }
 
-        public List<Anime> Animes { get; set; }
+        public List<AnimeVideo> AnimeVideos { get; set; }
         public int AnimeSeasonId { get; set; }
         public AnimeSeason AnimeSeason { get; set; }
     }
