@@ -14,6 +14,6 @@ namespace OnePiece.Web.Entities
 
         public List<MangaImage> MangaImages { get; set; }
         public int MangaSeasonId { get; set; }
-        public MangaSeason MangaSeason { get; set; }
+        public MangaVolume MangaSeason { get; set; }
     }
 }
