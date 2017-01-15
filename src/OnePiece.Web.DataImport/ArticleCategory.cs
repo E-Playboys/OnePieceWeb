@@ -24,8 +24,12 @@ namespace OnePiece.Web.DataImport
         public string Description { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public string CreatedUserId { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Article> Articles { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

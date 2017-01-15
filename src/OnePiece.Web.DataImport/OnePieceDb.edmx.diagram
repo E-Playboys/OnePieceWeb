@@ -4,9 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="44e87ed44c4d4b9ba0f553ddf85ab0d0" Name="Diagram1">
+      <Diagram DiagramId="44e87ed44c4d4b9ba0f553ddf85ab0d0" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="OnePieceModel.AnimeEpisode" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceModel.Anime" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.AnimeSeason" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.ArticleCategory" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.Article" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
@@ -15,30 +14,41 @@
         <EntityTypeShape EntityType="OnePieceModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="26.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.AspNetUser" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceModel.AspNetUserToken" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceModel.AspNetUserToken" Width="1.5" PointX="12.75" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.Image" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.MangaChapter" Width="1.5" PointX="6" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceModel.Manga" Width="1.5" PointX="8.25" PointY="24.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.MangaSeason" Width="1.5" PointX="3.75" PointY="30.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.MusicVideo" Width="1.5" PointX="5.25" PointY="39.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OnePieceModel.NewsFeed" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceModel.Video" Width="1.5" PointX="5.25" PointY="43.75" IsExpanded="true" />
         <AssociationConnector Association="OnePieceModel.FK_AnimeEpisodes_AnimeSeasons_AnimeSeasonId" ManuallyRouted="false" />
-        <AssociationConnector Association="OnePieceModel.FK_Animes_AnimeEpisodes_AnimeEpisodeId" ManuallyRouted="false" />
-        <AssociationConnector Association="OnePieceModel.FK_Animes_AspNetUsers_CreatedUserId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_Articles_ArticleCategories_ArticleCategoryId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_Articles_AspNetUsers_CreatedUserId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_AspNetRoleClaims_AspNetRoles_RoleId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_AspNetUserClaims_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_AspNetUserLogins_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_Images_AspNetUsers_CreatedUserId" ManuallyRouted="false" />
-        <AssociationConnector Association="OnePieceModel.FK_Mangas_AspNetUsers_CreatedUserId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_MusicVideos_AspNetUsers_CreatedUserId" ManuallyRouted="false" />
-        <AssociationConnector Association="OnePieceModel.FK_Videos_AspNetUsers_CreatedUserId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_Images_NewsFeeds_NewsFeedId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.FK_MangaChapters_MangaSeasons_MangaSeasonId" ManuallyRouted="false" />
-        <AssociationConnector Association="OnePieceModel.FK_Mangas_MangaChapters_MangaChapterId" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OnePieceModel.AnimeCategory" Width="1.5" PointX="5.25" PointY="34.75" />
+        <EntityTypeShape EntityType="OnePieceModel.AnimeVideo" Width="1.5" PointX="11.25" PointY="18.375" />
+        <EntityTypeShape EntityType="OnePieceModel.MangaImage" Width="1.5" PointX="11.25" PointY="24.375" />
+        <EntityTypeShape EntityType="OnePieceModel.VideoLink" Width="1.5" PointX="13.5" PointY="31" />
+        <AssociationConnector Association="OnePieceModel.FK_AnimeCategories_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_AnimeSeasons_AnimeCategories_AnimeCategoryId" />
+        <AssociationConnector Association="OnePieceModel.FK_AnimeEpisodes_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_AnimeVideos_AnimeEpisodes_AnimeEpisodeId" />
+        <AssociationConnector Association="OnePieceModel.FK_AnimeSeasons_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_AnimeVideos_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_VideoLinks_AnimeVideos_AnimeVideoId" />
+        <AssociationConnector Association="OnePieceModel.FK_ArticleCategories_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_MangaChapters_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_MangaImages_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_MangaSeasons_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_NewsFeeds_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_VideoLinks_AspNetUsers_CreatedUserId" />
+        <AssociationConnector Association="OnePieceModel.FK_MangaImages_MangaChapters_MangaChapterId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

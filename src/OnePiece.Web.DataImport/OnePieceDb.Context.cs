@@ -26,7 +26,6 @@ namespace OnePiece.Web.DataImport
         }
     
         public virtual DbSet<AnimeEpisode> AnimeEpisodes { get; set; }
-        public virtual DbSet<Anime> Animes { get; set; }
         public virtual DbSet<AnimeSeason> AnimeSeasons { get; set; }
         public virtual DbSet<ArticleCategory> ArticleCategories { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
@@ -38,10 +37,12 @@ namespace OnePiece.Web.DataImport
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<MangaChapter> MangaChapters { get; set; }
-        public virtual DbSet<Manga> Mangas { get; set; }
         public virtual DbSet<MangaSeason> MangaSeasons { get; set; }
         public virtual DbSet<MusicVideo> MusicVideos { get; set; }
         public virtual DbSet<NewsFeed> NewsFeeds { get; set; }
-        public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<AnimeCategory> AnimeCategories { get; set; }
+        public virtual DbSet<AnimeVideo> AnimeVideos { get; set; }
+        public virtual DbSet<MangaImage> MangaImages { get; set; }
+        public virtual DbSet<VideoLink> VideoLinks { get; set; }
     }
 }

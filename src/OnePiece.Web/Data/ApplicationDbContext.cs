@@ -23,7 +23,7 @@ namespace OnePiece.Web.Data
         public DbSet<Image> Images { get; set; }
         public DbSet<MangaImage> MangaImages { get; set; }
         public DbSet<MangaChapter> MangaChapters { get; set; }
-        public DbSet<MangaSeason> MangaSeasons { get; set; }
+        public DbSet<MangaVolume> MangaVolumes { get; set; }
         public DbSet<MusicVideo> MusicVideos { get; set; }
         public DbSet<NewsFeed> NewsFeeds { get; set; }
         public DbSet<Video> Videos { get; set; }
