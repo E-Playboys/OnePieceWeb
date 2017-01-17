@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OnePiece.Web.DataImport
@@ -18,7 +20,9 @@ namespace OnePiece.Web.DataImport
 
         static void Main(string[] args)
         {
-            ImportMangasData();
+            ///ImportMangasData();
+            ImportAnimeData();
+            Console.ReadLine();
         }
 
         static void ImportMangasData(string jsonFileName = "opChapters.txt")
@@ -116,6 +120,252 @@ namespace OnePiece.Web.DataImport
                 onePieceDb.MangaChapters.Add(newChapter);
                 onePieceDb.SaveChanges();
             }
+        }
+
+        static void ImportAnimeData(string jsonFileName = "opEpisode.txt")
+        {
+            Task.Run(async () =>
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var animeSeasonsData = new List<AnimeSeasonData>();
+                    animeSeasonsData = InitAnimeSeasonData();
+                    var animeSeasons = new List<AnimeSeason>();
+                    foreach (var animeSeasonData in animeSeasonsData)
+                    {
+                        var animeSeason = new AnimeSeason()
+                        {
+                            Number = animeSeasonData.Number,
+                            Name = animeSeasonData.Name,
+                            AnimeEpisodes = new List<AnimeEpisode>()
+                        };
+
+                        for (int i = animeSeasonData.StartEpisode; i <= animeSeasonData.EndEpisode; i++)
+                        {
+                            var episode = new AnimeEpisode()
+                            {
+                                Number = i,
+                                AnimeVideos = new List<AnimeVideo>()
+                            };
+
+                            var animeVideo = new AnimeVideo()
+                            {
+                                VideoLinks = new List<VideoLink>()
+                            };
+
+                            string result;
+                            // There's no topic for episode before 465
+                            if (i >= 465)
+                            {
+                                result = await httpClient.GetStringAsync($"http://fconepiece.com/one-piece-{i}");
+                                var matchTitle = Regex.Match(result,
+                                    "<h1 class=\"entry-title\">(.+)<");
+                                if (matchTitle.Success)
+                                {
+                                    episode.Name = matchTitle.Groups[1].Value;
+                                }
+                                var matchDesc = Regex.Match(result,
+                                    "<p>(.+)<\\/p>\\n<p>(.+)<br");
+                                if (matchDesc.Success)
+                                {
+                                    episode.Description = $"{matchDesc.Groups[1].Value} - {matchDesc.Groups[2].Value}";
+                                }
+                            }                            
+
+                            result = await httpClient.GetStringAsync($"http://onepiecefc.com/vi/one-piece-anime/episode-{i}");
+                            var match = Regex.Match(result,
+                                "(source src=)[\"\']?((?:.(?![\"\']?\\s+(?:\\S+)=|[>\"\']))+.)[\"\']?");
+                            if (match.Success)
+                            {
+                                var link = match.Groups[2].Value;
+                                var videoLink = new VideoLink()
+                                {
+                                    Url = link,
+                                    IsMainLink = true,
+                                    LinkType = 0, //LinkType.Stream
+                                    VideoQuality = 0//VideoQuality.Normal
+                                };
+
+                                animeVideo.VideoLinks.Add(videoLink);
+                                Console.WriteLine(link);
+                            }
+                            animeVideo.AnimeEpisode = episode;
+                            episode.AnimeSeason = animeSeason;
+                            episode.AnimeVideos.Add(animeVideo);
+                            animeSeason.AnimeEpisodes.Add(episode);
+                        }
+                        animeSeasons.Add(animeSeason);
+                        onePieceDb.AnimeSeasons.Add(animeSeason);
+                        onePieceDb.SaveChanges();
+                    }
+                    File.WriteAllText(jsonFileName, JsonConvert.SerializeObject(animeSeasons));
+                }
+            }).Wait();
+            Console.WriteLine("Done!");
+        }
+
+        public class AnimeSeasonData
+        {
+            public int Number { get; set; }
+
+            public string Name { get; set; }
+
+            public string Description { get; set; }
+
+            public int StartEpisode { get; set; }
+
+            public int EndEpisode { get; set; }
+        }
+
+        public static List<AnimeSeasonData> InitAnimeSeasonData()
+        {
+            List<AnimeSeasonData> data = new List<AnimeSeasonData>();
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 1,
+                Name = "Monkey D. Luffy",
+                Description = "",
+                StartEpisode = 1,
+                EndEpisode = 62
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 2,
+                Name = "Tiến vào Grand Line",
+                Description = "",
+                StartEpisode = 63,
+                EndEpisode = 77
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 3,
+                Name = "Gặp Chopper tại đảo Mùa Đông",
+                Description = "",
+                StartEpisode = 78,
+                EndEpisode = 92
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 4,
+                Name = "Tiến tới Alabasta",
+                Description = "",
+                StartEpisode = 93,
+                EndEpisode = 130
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 5,
+                Name = "Những giấc mơ",
+                Description = "",
+                StartEpisode = 131,
+                EndEpisode = 143
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 6,
+                Name = "Đảo trên Trời ",
+                Description = "",
+                StartEpisode = 144,
+                EndEpisode = 195
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 7,
+                Name = "Thoát khỏi pháo đài Naval & Băng hải tặc Foxy",
+                Description = "",
+                StartEpisode = 196,
+                EndEpisode = 228
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 8,
+                Name = "Water 7",
+                Description = "",
+                StartEpisode = 229,
+                EndEpisode = 263
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 9,
+                Name = "Sảnh Enies",
+                Description = "",
+                StartEpisode = 264,
+                EndEpisode = 336
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 10,
+                Name = "Thriller Bark",
+                Description = "",
+                StartEpisode = 337,
+                EndEpisode = 381
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 11,
+                Name = "Sabaody Archipelago",
+                Description = "",
+                StartEpisode = 382,
+                EndEpisode = 407
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 12,
+                Name = "Đảo Nữ Quốc",
+                Description = "",
+                StartEpisode = 408,
+                EndEpisode = 421
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 13,
+                Name = "Ngục Impel Down",
+                Description = "",
+                StartEpisode = 422,
+                EndEpisode = 458
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 14,
+                Name = "Tổng bộ Hải Quân/Tân thế giới",
+                Description = "",
+                StartEpisode = 459,
+                EndEpisode = 516
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 15,
+                Name = "Đảo người cá",
+                Description = "",
+                StartEpisode = 517,
+                EndEpisode = 574
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 16,
+                Name = "Đảo Punk Hazard",
+                Description = "",
+                StartEpisode = 575,
+                EndEpisode = 628
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 17,
+                Name = "Dressrosa",
+                Description = "",
+                StartEpisode = 629,
+                EndEpisode = 746
+            });
+            data.Add(new AnimeSeasonData()
+            {
+                Number = 1,
+                Name = "Zou",
+                Description = "",
+                StartEpisode = 747,
+                EndEpisode = 771
+            });
+
+            return data;
         }
 
         private static string[] episodeNames = {
