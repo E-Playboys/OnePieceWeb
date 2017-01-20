@@ -16,6 +16,9 @@ using OnePiece.Web.DataAccess;
 using OnePiece.Web.DataAccess.Entities;
 using OnePiece.Web.Models;
 using OnePiece.Web.Services;
+using OnePiece.Web.DataAccess.Uow;
+using OnePiece.Web.DataAccess.Repositories;
+using OnePiece.Web.Entities;
 
 namespace OnePiece.Web
 {
@@ -58,6 +61,8 @@ namespace OnePiece.Web
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddDataAccess<ApplicationDbContext>();
 
             services.AddMvc();
 
@@ -117,7 +122,7 @@ namespace OnePiece.Web
             public ApplicationDbContext Create(DbContextFactoryOptions options)
             {
                 var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                builder.UseSqlServer("Server=.\\SQLEXPRESS;Database=OnePiece;Integrated Security=true;User Id=sa;Password=123;");
+                builder.UseSqlServer("Server=.\\MSSQLSERVER2012;Database=OnePiece;Integrated Security=true;User Id=sa;Password=Abcd@@1234;");
                 return new ApplicationDbContext(builder.Options);
             }
         }
