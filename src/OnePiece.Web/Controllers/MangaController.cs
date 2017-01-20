@@ -8,6 +8,10 @@ using Microsoft.Extensions.Logging;
 using OnePiece.Web.Services;
 using Newtonsoft.Json;
 using OnePiece.Web.Entities;
+using OnePiece.Web.DataAccess;
+using OnePiece.Web.DataAccess.Repositories;
+using OnePiece.Web.DataAccess.Uow;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,25 +20,28 @@ namespace OnePiece.Web.Controllers
     [Route("api/[controller]")]
     public class MangaController : Controller
     {
+
+        private IUowProvider _uowProvider;
         private readonly ILogger _logger;
 
-        public MangaController(ILoggerFactory loggerFactory)
+        public MangaController(IUowProvider uowProvider)
         {
-            _logger = loggerFactory.CreateLogger<MangaController>();
+            _uowProvider = uowProvider;
         }
 
         [HttpGet]
-        public string Get()
+        [Route("GetAllVoumes")]
+        public async Task<IActionResult> GetAllVoumes()
         {
-            return "";
-        }
+            using (IUnitOfWork uow = _uowProvider.CreateUnitOfWork())
+            {
+                IEnumerable<MangaVolume> volumes;
+                IRepository<MangaVolume> repository = uow.GetRepository<MangaVolume>();
 
-        // GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+                volumes = await repository.GetAllAsync();
+                return new JsonResult(volumes);
+            }
+        }
 
         // POST api/values
         [HttpPost]
