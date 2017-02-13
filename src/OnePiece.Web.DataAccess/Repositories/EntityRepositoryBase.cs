@@ -93,6 +93,12 @@ namespace OnePiece.Web.DataAccess.Repositories
             return await result.ToListAsync();
         }
 
+        public virtual async Task<TEntity> QueryOneAsync(Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
+        {
+            var result = QueryDb(filter, orderBy, includes);
+            return await result.FirstOrDefaultAsync();
+        }
+
         public virtual void Load(Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null)
         {
             var result = QueryDb(filter, orderBy, includes);

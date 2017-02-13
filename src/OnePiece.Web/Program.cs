@@ -14,6 +14,7 @@ namespace OnePiece.Web
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://192.168.1.5:5000")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
