@@ -19,6 +19,7 @@ using OnePiece.Web.Services;
 using OnePiece.Web.DataAccess.Uow;
 using OnePiece.Web.DataAccess.Repositories;
 using OnePiece.Web.Entities;
+using Newtonsoft.Json;
 
 namespace OnePiece.Web
 {
@@ -64,7 +65,10 @@ namespace OnePiece.Web
 
             services.AddDataAccess<ApplicationDbContext>();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
