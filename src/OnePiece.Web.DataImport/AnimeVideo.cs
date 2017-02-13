@@ -12,21 +12,32 @@ namespace OnePiece.Web.DataImport
     using System;
     using System.Collections.Generic;
     
-    public partial class Video
+    public partial class AnimeVideo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AnimeVideo()
+        {
+            this.VideoLinks = new HashSet<VideoLink>();
+        }
+    
         public int Id { get; set; }
         public string AlternativeLink { get; set; }
+        public int AnimeEpisodeId { get; set; }
         public string AspectRatio { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedUserId { get; set; }
         public string Description { get; set; }
         public int Height { get; set; }
-        public string Link { get; set; }
         public string Name { get; set; }
+        public int Number { get; set; }
+        public string Poster { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public int VideoQuality { get; set; }
         public int Width { get; set; }
     
+        public virtual AnimeEpisode AnimeEpisode { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VideoLink> VideoLinks { get; set; }
     }
 }

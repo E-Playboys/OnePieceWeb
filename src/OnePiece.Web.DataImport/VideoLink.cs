@@ -12,24 +12,22 @@ namespace OnePiece.Web.DataImport
     using System;
     using System.Collections.Generic;
     
-    public partial class Anime
+    public partial class VideoLink
     {
         public int Id { get; set; }
-        public string AlternativeLink { get; set; }
-        public int AnimeEpisodeId { get; set; }
-        public string AspectRatio { get; set; }
+        public Nullable<int> AnimeVideoId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedUserId { get; set; }
-        public string Description { get; set; }
-        public int Height { get; set; }
-        public string Link { get; set; }
-        public string Name { get; set; }
-        public int Number { get; set; }
+        public bool IsMainLink { get; set; }
+        public int LinkType { get; set; }
+        public string Note { get; set; }
+        public string Source { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public string Url { get; set; }
+        public Nullable<int> VideoId { get; set; }
         public int VideoQuality { get; set; }
-        public int Width { get; set; }
     
-        public virtual AnimeEpisode AnimeEpisode { get; set; }
+        public virtual AnimeVideo AnimeVideo { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

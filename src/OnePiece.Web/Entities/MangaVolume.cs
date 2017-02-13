@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OnePiece.Web.DataAccess.Entities;
+using System;
 
 namespace OnePiece.Web.Entities
 {
-    public class AnimeEpisode : Tracking
+    public class MangaVolume : Tracking
     {
         public string Name { get; set; }
         public string Avatar { get; set; }
@@ -12,8 +12,6 @@ namespace OnePiece.Web.Entities
         public string Description { get; set; }
         public DateTime? PublishedDate { get; set; }
 
-        public List<AnimeVideo> AnimeVideos { get; set; }
-        public int AnimeSeasonId { get; set; }
-        public AnimeSeason AnimeSeason { get; set; }
+        public List<MangaChapter> MangaChapters { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using OnePiece.Web.Entities.Enums;
 
 namespace OnePiece.Web.Entities
 {
-    public class NewsFeed : EntityBase
+    public class NewsFeed : Tracking
     {
         public string Title { get; set; }
         public string Description { get; set; }

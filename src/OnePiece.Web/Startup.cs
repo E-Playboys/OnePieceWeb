@@ -16,6 +16,10 @@ using OnePiece.Web.DataAccess;
 using OnePiece.Web.DataAccess.Entities;
 using OnePiece.Web.Models;
 using OnePiece.Web.Services;
+using OnePiece.Web.DataAccess.Uow;
+using OnePiece.Web.DataAccess.Repositories;
+using OnePiece.Web.Entities;
+using Newtonsoft.Json;
 
 namespace OnePiece.Web
 {
@@ -59,7 +63,12 @@ namespace OnePiece.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddDataAccess<ApplicationDbContext>();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -117,7 +126,7 @@ namespace OnePiece.Web
             public ApplicationDbContext Create(DbContextFactoryOptions options)
             {
                 var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                builder.UseSqlServer("Server=.\\SQLEXPRESS;Database=OnePiece;Integrated Security=true;User Id=sa;Password=123;");
+                builder.UseSqlServer("Server=.\\MSSQLSERVER2012;Database=OnePiece;Integrated Security=true;User Id=sa;Password=Abcd@@1234;");
                 return new ApplicationDbContext(builder.Options);
             }
         }
