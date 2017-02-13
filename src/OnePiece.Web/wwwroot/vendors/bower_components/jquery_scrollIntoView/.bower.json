@@ -1,0 +1,34 @@
+{
+  "name": "jquery_scrollIntoView",
+  "main": "jquery.scrolling.js",
+  "license": "MIT",
+  "ignore": [],
+  "keywords": [
+    "event",
+    "scrolling",
+    "scroll",
+    "scrollin",
+    "scrollout",
+    "appear",
+    "disappear"
+  ],
+  "dependencies": {
+    "jquery": ">=1.5"
+  },
+  "homepage": "https://github.com/darkseal/jquery.scrolling",
+  "authors": [
+    "Darkseal <https://github.com/darkseal>",
+    "Andrey Sidorov <https://github.com/morr>"
+  ],
+  "description": "jQuery plugin for tracking element scrolling inside and outside the browser viewport",
+  "_release": "e922b0fe6f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e922b0fe6f057147bbbb6b31a62975018ea323fd"
+  },
+  "_source": "https://github.com/Darkseal/jquery.scrolling.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/Darkseal/jquery.scrolling.git",
+  "_direct": true
+}
