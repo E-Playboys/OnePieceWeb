@@ -92,7 +92,7 @@ namespace OnePiece.Web
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
+            //app.UseApplicationInsightsRequestTelemetry();
 
             if (env.IsDevelopment())
             {
@@ -105,7 +105,7 @@ namespace OnePiece.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseApplicationInsightsExceptionTelemetry();
+            //app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
 
@@ -126,7 +126,7 @@ namespace OnePiece.Web
             public ApplicationDbContext Create(DbContextFactoryOptions options)
             {
                 var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                builder.UseSqlServer("Server=.\\MSSQLSERVER2012;Database=OnePiece;Integrated Security=true;User Id=sa;Password=Abcd@@1234;");
+                builder.UseSqlServer("Server=.\\SQLEXPRESS;Database=OnePiece;Integrated Security=true;User Id=OnePieceApi;Password=Abcd@@1234;");
                 return new ApplicationDbContext(builder.Options);
             }
         }

@@ -15,7 +15,7 @@ namespace OnePiece.Web.Controllers
     {
 
         private IUowProvider _uowProvider;
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
 
         public AnimeController(IUowProvider uowProvider)
         {
